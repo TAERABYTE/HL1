@@ -26,17 +26,17 @@ It provides classic-style components along with a demo page to try them out.<br>
 
 # ⚙️Component
 
-✅Input [🔗](https://hl1css.vercel.app/#Input "🔗")<br>
-✅Checkbox [🔗](https://hl1css.vercel.app/#Checkbox "🔗")<br>
-✅Select [🔗](https://hl1css.vercel.app/#Select "🔗")<br>
-✅Radio Group [🔗](https://hl1css.vercel.app/#RadioGroup "🔗")<br>
-✅Slider [🔗](https://hl1css.vercel.app/#Slider "🔗")<br>
-✅Progress Bar [🔗](https://hl1css.vercel.app/#ProgressBar "🔗")<br>
-✅Button [🔗](https://hl1css.vercel.app/#Button "🔗")<br>
-✅Tooltip [🔗](https://hl1css.vercel.app/#Tooltip "🔗")<br>
-✅Dialog [🔗](https://hl1css.vercel.app/#Dialog "🔗")<br>
-✅Horizontal Rule [🔗](https://hl1css.vercel.app/#HorizontalRule "🔗")<br>
-✅Tabs [🔗](https://hl1css.vercel.app/#Tabs)<br>
+✅Input<br>
+✅Checkbox<br>
+✅Select<br>
+✅Radio Group<br>
+✅Slider<br>
+✅Progress Bar<br>
+✅Button<br>
+✅Tooltip<br>
+✅Dialog<br>
+✅Horizontal Rule<br>
+✅Tabs<br>
 
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW9rd3o4aDdndWIwbmp1aTMyNzNtNG10dWppcXZlZDlzazJ5bDJyNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2x4b4X7yUnmww/giphy.gif" alt="HL1.css logo" height="300" style="margin: 0 auto;">
