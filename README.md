@@ -13,7 +13,7 @@ It provides classic-style components along with a demo page to try them out.<br>
 **[Documentation](https://hl1css.vercel.app/ "Documentation")**
 <br>
 
-# ⚙️Installation
+# 📥 Installation
 
 **Add the CDN link to your project and you're ready to go.**
 
@@ -24,19 +24,33 @@ It provides classic-style components along with a demo page to try them out.<br>
 <br>
 <br>
 
-# ⚙️Component
+# 🧩 Component
 
-✅Input<br>
-✅Checkbox<br>
-✅Select<br>
-✅Radio Group<br>
-✅Slider<br>
-✅Progress Bar<br>
-✅Button<br>
-✅Tooltip<br>
-✅Dialog<br>
-✅Horizontal Rule<br>
-✅Tabs<br>
+1. Layout / Structure
+   - Container / Box ⏳
+   - Table-based or simple grid layout ⏳
+   - Horizontal Rule ✅
+
+2. Forms & Inputs
+   - Input fields (text, password) ✅
+   - Labels ✅
+   - Checkbox / Radio button (classic Windows-style) ✅
+   - Select dropdown (flat or beveled) ✅
+
+3. Buttons
+   - Default button ✅
+   - Variants: primary / warning / success / danger ✅
+   - Disabled state ✅
+
+4. Feedback / Indicators
+   - Progress bar ✅
+   - Tooltip ✅
+   - Dialog / Modal ⏳
+
+5. Navigation
+   - Tabs ✅
+
+
 
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW9rd3o4aDdndWIwbmp1aTMyNzNtNG10dWppcXZlZDlzazJ5bDJyNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2x4b4X7yUnmww/giphy.gif" alt="HL1.css logo" height="300" style="margin: 0 auto;">
