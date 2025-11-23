@@ -4,27 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/HL1.min.css" />
+    <!-- <link rel="stylesheet" href="/src/HL1.css" /> -->
     <link rel="stylesheet" href="/src/index.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="title" content="HL1.css" />
-    <meta
-      name="description"
-      content="CSS library based on Half-Life 1 UI."
-    />
+    <meta name="description" content="CSS library based on Half-Life 1 UI." />
     <meta name="keywords" content="hl 1, hl 1 css, retro css" />
     <meta name="author" content="Samuel Breznjak" />
 
     <meta property="og:title" content="HL1.css" />
     <meta
       property="og:description"
-      content="CSS library based on Half-Life 1 UI."
-    />
+      content="CSS library based on Half-Life 1 UI." />
     <meta property="og:site_name" content="HL1.css" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image:alt"
-      content="CSS library based on Half-Life 1 UI."
-    />
+      content="CSS library based on Half-Life 1 UI." />
 
     <title>HL1.css</title>
   </head>
@@ -37,7 +33,7 @@
     </header>
 
     <div style="margin-bottom: 10px" class="installation">
-      <h2>Installation</h2>
+      <h2 style="color: #c4b550"># Installation</h2>
 
       <p>
         You can install HL1.css simply by pasting this to your html `head` tag:
@@ -47,17 +43,26 @@
         <div class="inner">
           <button class="hl-btn">Copy</button>
 
-          <pre><code id="code-block">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/gh/ekmas/cs16.css@main/css/cs16.min.css&quot;&gt;</code></pre>
+          <pre><code id="code-block">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/&quot;&gt;</code></pre>
         </div>
       </div>
     </div>
 
+    <br />
+
     <main>
+      <!-- # Input -->
       <div>
-        <h2>Button</h2>
+        <h2 style="color: #c4b550"># Input</h2>
 
-        <button class="hl-btn">Button</button>
-        <button disabled class="hl-btn">Disabled</button>
+        <input class="hl-input" id="input" type="input" />
+        <label class="hl-input__label" for="input">First name</label>
+
+        <br />
+        <br />
+
+        <input type="text" value="john wick" class="hl-input" />
+        <input type="text" disabled value="Disabled" class="hl-input" />
 
         <div class="code-block">
           <button class="hl-btn toggle-vision">Show code</button>
@@ -65,28 +70,20 @@
           <div class="inner hidden">
             <button class="hl-btn">Copy</button>
 
-            <pre><code id="code-block">&lt;button class="hl-btn"&gt;Button&lt;/button&gt;
-&lt;button disabled class="hl-btn"&gt;Disabled&lt;/button&gt;</code></pre>
+            <pre><code id="code-block">&lt;input class=&quot;hl-input&quot; id=&quot;input&quot; type=&quot;input&quot; /&gt;
+&lt;label class=&quot;hl-input__label&quot; for=&quot;input&quot;&gt;First name&lt;/label&gt;
+
+&lt;br /&gt;
+&lt;br /&gt;
+
+&lt;input type=&quot;text&quot; value=&quot;john wick&quot; class=&quot;hl-input&quot; /&gt;
+&lt;input type=&quot;text&quot; disabled value=&quot;Disabled&quot; class=&quot;hl-input&quot; /&gt;</code></pre>
           </div>
         </div>
       </div>
+      <!-- # Checkbox -->
       <div>
-        <h2>Hr</h2>
-
-        <hr class="hl-hr" />
-
-        <div class="code-block">
-          <button class="hl-btn toggle-vision">Show code</button>
-
-          <div class="inner hidden">
-            <button class="hl-btn">Copy</button>
-
-            <pre><code id="code-block">&lt;hr class=&quot;hl-hr&quot; /&gt;</code></pre>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h2>Checkbox</h2>
+        <h2 style="color: #c4b550"># Checkbox</h2>
 
         <div class="hl-checkbox">
           <input id="checkbox" type="checkbox" />
@@ -106,44 +103,16 @@
           </div>
         </div>
       </div>
+      <!-- # Select -->
       <div>
-        <h2>Input</h2>
+        <h2 style="color: #c4b550"># Select</h2>
 
-        <input class="hl-input" id="input" type="input" />
-        <label class="hl-input__label" for="input">First name</label>
-
-        <br />
-        <br />
-
-        <input type="text" value="John Doe" class="hl-input" />
-        <input type="text" disabled value="disabled" class="hl-input" />
-
-        <div class="code-block">
-          <button class="hl-btn toggle-vision">Show code</button>
-
-          <div class="inner hidden">
-            <button class="hl-btn">Copy</button>
-
-            <pre><code id="code-block">&lt;input class=&quot;hl-input&quot; id=&quot;input&quot; type=&quot;input&quot; /&gt;
-&lt;label class=&quot;hl-input__label&quot; for=&quot;input&quot;&gt;First name&lt;/label&gt;
-
-&lt;br /&gt;
-&lt;br /&gt;
-
-&lt;input type=&quot;text&quot; value=&quot;John Doe&quot; class=&quot;hl-input&quot; /&gt;
-&lt;input type=&quot;text&quot; disabled value=&quot;disabled&quot; class=&quot;hl-input&quot; /&gt;</code></pre>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h2>Select</h2>
-
-        <label class="hl-select__label" for="cars">Choose a car:</label>
+        <label class="hl-select__label" for="cars">choose something:</label>
         <select class="hl-select" name="cars" id="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
+          <option value="volvo">i</option>
+          <option value="saab">love</option>
+          <option value="opel">you</option>
+          <option value="audi">so much</option>
         </select>
 
         <div class="code-block">
@@ -152,18 +121,19 @@
           <div class="inner hidden">
             <button class="hl-btn">Copy</button>
 
-            <pre><code id="code-block">&lt;label class=&quot;hl-select__label&quot; for=&quot;cars&quot;&gt;Choose a car:&lt;/label&gt;
-&lt;select class=&quot;hl-select&quot; name=&quot;cars&quot; id=&quot;cars&quot;&gt;
-  &lt;option value=&quot;volvo&quot;&gt;Volvo&lt;/option&gt;
-  &lt;option value=&quot;saab&quot;&gt;Saab&lt;/option&gt;
-  &lt;option value=&quot;opel&quot;&gt;Opel&lt;/option&gt;
-  &lt;option value=&quot;audi&quot;&gt;Audi&lt;/option&gt;
+            <pre><code id="code-block">&lt;label class=&quot;hl-select__label&quot; for=&quot;something&quot;&gt;choose something:&lt;/label&gt;
+&lt;select class=&quot;hl-select&quot; name=&quot;something&quot; id=&quot;something&quot;&gt;
+  &lt;option value=&quot;i&quot;&gt;i&lt;/option&gt;
+  &lt;option value=&quot;love&quot;&gt;love&lt;/option&gt;
+  &lt;option value=&quot;you&quot;&gt;you&lt;/option&gt;
+  &lt;option value=&quot;so much&quot;&gt;so much&lt;/option&gt;
 &lt;/select&gt;</code></pre>
           </div>
         </div>
       </div>
+      <!-- # Radio Group -->
       <div>
-        <h2>Radio Group</h2>
+        <h2 style="color: #c4b550"># Radio Group</h2>
 
         <fieldset class="hl-fieldset">
           <legend>What is your favorite wild animal?</legend>
@@ -213,8 +183,9 @@
           </div>
         </div>
       </div>
+      <!-- # Slider -->
       <div>
-        <h2>Slider</h2>
+        <h2 style="color: #c4b550"># Slider</h2>
 
         <div class="hl-slider">
           <div class="value">
@@ -222,7 +193,7 @@
             <p>Light</p>
           </div>
           <div class="ruler"></div>
-          <input id="range" type="range" min="1" max="100" value="50" />
+          <input id="range" type="range" min="1" max="100" value="25" />
           <label for="range">Brightness</label>
         </div>
 
@@ -238,49 +209,19 @@
     &lt;p&gt;Light&lt;/p&gt;
   &lt;/div&gt;
   &lt;div class=&quot;ruler&quot;&gt;&lt;/div&gt;
-  &lt;input id=&quot;range&quot; type=&quot;range&quot; min=&quot;1&quot; max=&quot;100&quot; value=&quot;50&quot; /&gt;
+  &lt;input id=&quot;range&quot; type=&quot;range&quot; min=&quot;1&quot; max=&quot;100&quot; value=&quot;25&quot; /&gt;
   &lt;label for=&quot;range&quot;&gt;Brightness&lt;/label&gt;
 &lt;/div&gt;</code></pre>
           </div>
         </div>
       </div>
+      <!-- # Progress Bar -->
       <div>
-        <h2>Dialog</h2>
+        <h2 style="color: #c4b550"># Progress Bar</h2>
 
-        <section>
-          <button
-            type="button"
-            class="hl-btn"
-            onclick="document.querySelector('.hl-dialog').showModal();"
-          >
-            Open dialog
-          </button>
-          <dialog class="hl-dialog">
-            <form method="dialog">
-              <div class="heading">
-                <div class="wrapper">
-                  <div class="icon"></div>
-                  <p class="text">Options</p>
-                </div>
-                <button class="hl-btn close"></button>
-              </div>
-              <div class="content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Distinctio ad suscipit aut asperiores laudantium error amet
-                sapiente et tempora numquam voluptates, velit sint quos
-                exercitationem unde obcaecati deleniti maiores officia natus
-                ipsa rem fuga commodi esse. Sunt repellendus ipsa illo a
-                accusantium consequuntur nihil dicta necessitatibus porro,
-                saepe, sed repudiandae!
-              </div>
-              <menu class="footer-btns">
-                <button class="hl-btn">OK</button>
-                <button class="hl-btn">Cancel</button>
-                <button class="hl-btn">Apply</button>
-              </menu>
-            </form>
-          </dialog>
-        </section>
+        <div class="hl-progress-bar">
+          <div style="width: 80%" class="bars"></div>
+        </div>
 
         <div class="code-block">
           <button class="hl-btn toggle-vision">Show code</button>
@@ -288,45 +229,41 @@
           <div class="inner hidden">
             <button class="hl-btn">Copy</button>
 
-            <pre><code id="code-block">&lt;section&gt;
-  &lt;button
-    type=&quot;button&quot;
-    class=&quot;hl-btn&quot;
-    onclick=&quot;document.querySelector(&apos;.hl-dialog&apos;).showModal();&quot;
-  &gt;
-    Open dialog
-  &lt;/button&gt;
-  &lt;dialog class=&quot;hl-dialog&quot;&gt;
-    &lt;form method=&quot;dialog&quot;&gt;
-      &lt;div class=&quot;heading&quot;&gt;
-        &lt;div class=&quot;wrapper&quot;&gt;
-          &lt;div class=&quot;icon&quot;&gt;&lt;/div&gt;
-          &lt;p class=&quot;text&quot;&gt;Options&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;button class=&quot;hl-btn close&quot;&gt;&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;content&quot;&gt;
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Distinctio ad suscipit aut asperiores laudantium error amet
-        sapiente et tempora numquam voluptates, velit sint quos
-        exercitationem unde obcaecati deleniti maiores officia natus
-        ipsa rem fuga commodi esse. Sunt repellendus ipsa illo a
-        accusantium consequuntur nihil dicta necessitatibus porro,
-        saepe, sed repudiandae!
-      &lt;/div&gt;
-      &lt;menu class=&quot;footer-btns&quot;&gt;
-        &lt;button class=&quot;hl-btn&quot;&gt;OK&lt;/button&gt;
-        &lt;button class=&quot;hl-btn&quot;&gt;Cancel&lt;/button&gt;
-        &lt;button class=&quot;hl-btn&quot;&gt;Apply&lt;/button&gt;
-      &lt;/menu&gt;
-    &lt;/form&gt;
-  &lt;/dialog&gt;
-&lt;/section&gt;</code></pre>
+            <pre><code id="code-block">&lt;div class=&quot;hl-progress-bar&quot;&gt;
+  &lt;div style=&quot;width: 80%&quot; class=&quot;bars&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
           </div>
         </div>
       </div>
+      <!-- # Button -->
       <div>
-        <h2>Tooltip</h2>
+        <h2 style="color: #c4b550"># Button</h2>
+
+        <button class="hl-btn">Button</button>
+        <button class="hl-btn-success">Success</button>
+        <button class="hl-btn-primary">Primary</button>
+        <button class="hl-btn-warning">Warning</button>
+        <button class="hl-btn-danger">Danger</button>
+        <button class="hl-btn" disabled>Disabled</button>
+
+        <div class="code-block">
+          <button class="hl-btn toggle-vision">Show code</button>
+
+          <div class="inner hidden">
+            <button class="hl-btn">Copy</button>
+
+            <pre><code id="code-block">&lt;button class="hl-btn"&gt;Button&lt;/button&gt;
+&lt;button class="hl-btn-success"&gt;Success&lt;/button&gt;
+&lt;button class="hl-btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="hl-btn-warning"&gt;Warning&lt;/button&gt;
+&lt;button class="hl-btn-danger"&gt;Danger&lt;/button&gt;
+&lt;button class="hl-btn" disabled&gt;Disabled&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <!-- # Tooltip -->
+      <div>
+        <h2 style="color: #c4b550"># Tooltip</h2>
 
         <div class="hl-tooltip">
           Right
@@ -396,12 +333,43 @@
           </div>
         </div>
       </div>
+      <!-- # Dialog -->
       <div>
-        <h2>Progress Bar</h2>
+        <h2 style="color: #c4b550"># Dialog</h2>
 
-        <div class="hl-progress-bar">
-          <div style="width: 50%" class="bars"></div>
-        </div>
+        <section>
+          <button
+            type="button"
+            class="hl-btn"
+            onclick="document.querySelector('.hl-dialog').showModal();">
+            Open dialog
+          </button>
+          <dialog class="hl-dialog">
+            <form method="dialog">
+              <div class="heading">
+                <div class="wrapper">
+                  <div class="icon"></div>
+                  <p class="text">Options</p>
+                </div>
+                <button class="hl-btn close"></button>
+              </div>
+              <div class="content">
+                The Half-Life 1 manual text details the game's controls,
+                including primary fire (Mouse 1), secondary fire (Mouse 2), and
+                weapon switching (Mouse Wheel, 'Q'). It also explains movement
+                keys like WASD or arrow keys, jump (Spacebar), and actions such
+                as crouching (Control) and using the flashlight (F). The manual
+                covers the game's main menu options and recommends the Hazard
+                Course for new players.
+              </div>
+              <menu class="footer-btns">
+                <button class="hl-btn">OK</button>
+                <button class="hl-btn">Cancel</button>
+                <button class="hl-btn">Apply</button>
+              </menu>
+            </form>
+          </dialog>
+        </section>
 
         <div class="code-block">
           <button class="hl-btn toggle-vision">Show code</button>
@@ -409,14 +377,61 @@
           <div class="inner hidden">
             <button class="hl-btn">Copy</button>
 
-            <pre><code id="code-block">&lt;div class=&quot;hl-progress-bar&quot;&gt;
-  &lt;div style=&quot;width: 50%&quot; class=&quot;bars&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+            <pre><code id="code-block">&lt;section&gt;
+  &lt;button
+    type=&quot;button&quot;
+    class=&quot;hl-btn&quot;
+    onclick=&quot;document.querySelector(&apos;.hl-dialog&apos;).showModal();&quot; &gt;
+    Open dialog
+  &lt;/button&gt;
+  &lt;dialog class=&quot;hl-dialog&quot;&gt;
+    &lt;form method=&quot;dialog&quot;&gt;
+      &lt;div class=&quot;heading&quot;&gt;
+        &lt;div class=&quot;wrapper&quot;&gt;
+          &lt;div class=&quot;icon&quot;&gt;&lt;/div&gt;
+          &lt;p class=&quot;text&quot;&gt;Options&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;hl-btn close&quot;&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;content&quot;&gt;
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Distinctio ad suscipit aut asperiores laudantium error amet
+        sapiente et tempora numquam voluptates, velit sint quos
+        exercitationem unde obcaecati deleniti maiores officia natus
+        ipsa rem fuga commodi esse. Sunt repellendus ipsa illo a
+        accusantium consequuntur nihil dicta necessitatibus porro,
+        saepe, sed repudiandae!
+      &lt;/div&gt;
+      &lt;menu class=&quot;footer-btns&quot;&gt;
+        &lt;button class=&quot;hl-btn&quot;&gt;OK&lt;/button&gt;
+        &lt;button class=&quot;hl-btn&quot;&gt;Cancel&lt;/button&gt;
+        &lt;button class=&quot;hl-btn&quot;&gt;Apply&lt;/button&gt;
+      &lt;/menu&gt;
+    &lt;/form&gt;
+  &lt;/dialog&gt;
+&lt;/section&gt;</code></pre>
           </div>
         </div>
       </div>
+      <!-- # Hr -->
       <div>
-        <h2>Tabs</h2>
+        <h2 style="color: #c4b550"># Hr</h2>
+
+        <hr class="hl-hr" />
+
+        <div class="code-block">
+          <button class="hl-btn toggle-vision">Show code</button>
+
+          <div class="inner hidden">
+            <button class="hl-btn">Copy</button>
+
+            <pre><code id="code-block">&lt;hr class=&quot;hl-hr&quot; /&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <!-- # Tabs -->
+      <div>
+        <h2 style="color: #c4b550"># Tabs</h2>
 
         <div class="hl-tabs">
           <input
@@ -425,8 +440,7 @@
             tabindex="1"
             type="radio"
             id="tabone"
-            checked="checked"
-          />
+            checked="checked" />
           <label class="label" for="tabone">Tab One</label>
           <div class="panel" tabindex="1">
             <h2>Tab One Content</h2>
@@ -437,8 +451,7 @@
             tabindex="1"
             name="tabs"
             type="radio"
-            id="tabtwo"
-          />
+            id="tabtwo" />
           <label class="label" for="tabtwo">Tab Two</label>
           <div class="panel" tabindex="1">
             <h2>Tab Two Content</h2>
@@ -449,8 +462,7 @@
             tabindex="1"
             name="tabs"
             type="radio"
-            id="tabthree"
-          />
+            id="tabthree" />
           <label class="label" for="tabthree">Tab Three</label>
           <div class="panel" tabindex="1">
             <h2>Tab Three Content</h2>
@@ -508,9 +520,7 @@
       </div>
     </main>
 
-    <footer>
-      Made by TAE
-    </footer>
+    <footer style="color: #fb821b">Made by TAE</footer>
 
     <script type="module" src="./src/main.js"></script>
   </body>
