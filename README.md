@@ -19,7 +19,7 @@
 
 ## 📥 Installation
 
-### CDN via jsDelivr 
+### CDN (Content Delivery Network)
 Skip the download with jsDelivr to deliver cached version of HL1 compiled CSS and JS to your project.
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1.css@main/css/HL1.min.css"/>
@@ -112,6 +112,7 @@ Skip the download with jsDelivr to deliver cached version of HL1 compiled CSS an
 
 ```html
 🧡 Inspiration and Backstory
+
 HL1.css was born from warm childhood memories of spending countless hours on classic legendary games like Half-Life 1 and Counter-Strike 1.6!
 
 We were deeply captivated by the simple, angular Interface and HUD design, along with the unique low-fidelity colors characteristic of the '90s and '2000s. This inspired us to bring that exact "feeling" back to the modern web.
