@@ -1,64 +1,146 @@
-<div style="background-color: #4a5942; padding: 40px 30px;color: #ffffff;">
-  <!-- Logos -->
-  <dev style="display: inline-flex; gap: 10px; align-items: center; justify-content: center;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Orange_lambda.svg" alt="HL1.css logo" height="100" style="margin: 0;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Official_CSS_Logo.svg" alt="HL1.css logo" height="100" style="margin: 0;">
-  </dev>
+
+<div style="background-color: #4a5942; padding: 40px 30px; border-radius: 8px;">
+  <div style="display: flex; gap: 15px; align-items: center; justify-content: center; color: #ffffff;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Orange_lambda.svg" alt="HL1.css logo" height="60" style="margin: 0;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Official_CSS_Logo.svg" alt="CSS logo" height="60" style="margin: 0;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="CSS logo" height="60" style="margin: 0;">
+  </div>
 </div>
+<br>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
 
 # 入 HL1.css
 
-**HL1.css** is a lightweight retro UI CSS library, inspired by _Half‑Life 1_.  
-It provides classic-style components along with a demo page to try them out.<br>
-**[Documentation](https://hl1css.vercel.app/ "Documentation")**
+**A Lightweight, Retro UI CSS Framework 入 Inspired by Half-Life 1.** <br>
+**[🔗Documentation](https://hl1css.vercel.app/ "🔗Documentation")**
+
 <br>
 
-# 📥 Installation
+## 📥 Installation
 
-**Add the CDN link to your project and you're ready to go.**
-
+### CDN via jsDelivr 
+Skip the download with jsDelivr to deliver cached version of HL1 compiled CSS and JS to your project.
 ```html
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1.css@main/css/HL1.min.css" />
-```
-
-```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1.css@main/css/HL1.min.css"/>
 <script type="module" src="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1.css@main/js/main.min.js" defer></script>
 ```
 
 <br>
 <br>
 
-# 🧩 Component
+## 📚 CSS Library
 
-1. Layout / Structure
-   - Container / Box ⏳
-   - Table-based or simple grid layout ⏳
-   - Horizontal Rule ✅
+### Elements
+- [ ] Block
+- [ ] Box
+- [X] Button
+- [ ] Content
+- [ ] Delete
+- [X] Icon
+- [ ] Image
+- [ ] Notification
+- [X] Progress bars
+- [ ] Table
+- [ ] Tag
+- [ ] Title
+- [X] Horizontal Rule
 
-2. Forms & Inputs
-   - Input fields (text, password) ✅
-   - Labels ✅
-   - Checkbox / Radio button (classic Windows-style) ✅
-   - Select dropdown (flat or beveled) ✅
+### Components
+- [ ] Breadcrumb
+- [ ] Card
+- [ ] Dropdown
+- [ ] Menu
+- [ ] Message
+- [ ] Modal
+- [ ] Navbar
+- [ ] Pagination
+- [ ] Panel
+- [X] Tabs
 
-3. Buttons
-   - Default button ✅
-   - Variants: primary / warning / success / danger ✅
-   - Disabled state ✅
+### Form
+- [ ] General
+- [X] Input
+- [ ] Textarea
+- [X] Select
+- [X] Checkbox
+- [ ] Radio
+- [ ] File
 
-4. Feedback / Indicators
-   - Progress bar ✅
-   - Tooltip ✅
-   - Dialog / Modal ⏳
+### Columns
+- [ ] Basics
+- [ ] Sizes
+- [ ] Responsiveness
+- [ ] Nesting
+- [ ] Gap
+- [ ] Options
 
-5. Navigation
-   - Tabs ✅
+### Grid
+- [ ] Smart Grid
+- [ ] Fixed Grid
+- [ ] Grid Cells
+- [ ] Playground
 
+### Layout
+- [ ] Container
+- [ ] Hero
+- [ ] Section
+- [ ] Level
+- [ ] Media Object
+- [ ] Footer
 
-
-
-<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW9rd3o4aDdndWIwbmp1aTMyNzNtNG10dWppcXZlZDlzazJ5bDJyNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2x4b4X7yUnmww/giphy.gif" alt="HL1.css logo" height="300" style="margin: 0 auto;">
-<a href="https://github.com/TAERABYTE/HL1.css/blob/main/src/README.md" style="color: #fb821b; font-weight: bold; text-decoration: none; font-size: 1em;">
-forDev
-</a>
 <br>
+
+## 📚 CSS Library
+- [ ] Color Palette
+- [ ] Spacing
+- [ ] Visibility
+- [ ] Flexbox
+- [ ] Other
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+```html
+🧡 Inspiration and Backstory
+HL1.css was born from warm childhood memories of spending countless hours on classic legendary games like Half-Life 1 and Counter-Strike 1.6!
+
+We were deeply captivated by the simple, angular Interface and HUD design, along with the unique low-fidelity colors characteristic of the '90s and '2000s. This inspired us to bring that exact "feeling" back to the modern web.
+
+This project is not just a typical CSS Library; it's a Love Letter to the golden age of PC gaming we grew up with. It meticulously recreates familiar UI elements like Beveled Buttons, Bitmap Fonts, and Green-Gray Tones using modern CSS.
+
+```
+
+<br>
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<div align="center">
+
+`[HL1.css: NON-PROFIT PROJECT] Built purely out of passion, with no intention of commercial trade or financial gain. Its sole purpose is to share joy and nostalgia through web development.` 🧑‍💻
+
+</div>
+<br>
+
+<div align="center">
+  <a href="https://github.com/TAERABYTE/HL1.css/blob/main/src/README.md">
+    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW9rd3o4aDdndWIwbmp1aTMyNzNtNG10dWppcXZlZDlzazJ5bDJyNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2x4b4X7yUnmww/giphy.gif" alt="HL1.css" height="150" />
+  </a>
+    <img src="https://media.moddb.com/images/members/5/4640/4639916/profile/color.png" alt="HL1.css" height="150" />
+
+</div>
+<br>
+<div align="center">
+
+![Version](https://img.shields.io/github/v/tag/TAERABYTE/HL1.css?label=Version)
+![Size](https://img.shields.io/bundlephobia/minzip/hl1.css)
+![License](https://img.shields.io/github/license/TAERABYTE/HL1.css)
+
+</div>
