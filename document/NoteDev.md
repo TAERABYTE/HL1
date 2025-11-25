@@ -15,3 +15,9 @@
 
 
 ## 1dev.html มีใว้เพื่อเทสส่วนใหม่ๆ แล้วก็รวม code UI ที่พัฒนามาใช้งาน
+
+
+
+
+## escape แปลง code ปกติ ใส่ใน <code>
+[escape](https://codebeautify.org/html-escape-unescape)

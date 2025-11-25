@@ -440,14 +440,38 @@
           <div class="inner hidden">
             <button class="hl-btn">Copy</button>
 
-            <pre><code id="code-block">&lt;button class=&quot;hl-btn&quot; id=&quot;open-modal&quot;&gt;Open modal&lt;/button&gt;
-&lt;div class=&quot;hl-modal-overlay&quot;&gt;
-  &lt;div class=&quot;hl-modal&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot;&gt;
-    &lt;div class=&quot;heading&quot;&gt;...&lt;/div&gt;
-    &lt;div class=&quot;content&quot;&gt;...&lt;/div&gt;
-    &lt;menu class=&quot;footer-btns&quot;&gt;...&lt;/menu&gt;
+            <pre><code id="code-block">&lt;section&gt;
+  &lt;button type="button" class="hl-btn" id="open-modal"&gt;
+    Open modal
+  &lt;/button&gt;
+
+  &lt;!-- modal overlay + box --&gt;
+  &lt;div class="hl-modal-overlay hidden" id="hl-modal-overlay"&gt;
+    &lt;div
+      class="hl-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    &gt;
+      &lt;div class="heading"&gt;
+        &lt;div class="wrapper drag-handle"&gt;
+          &lt;div class="icon"&gt;&lt;/div&gt;
+          &lt;p class="text" id="modal-title"&gt;Custom Modal&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class="hl-btn close no-drag" id="modal-close"&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="content"&gt;
+        This is a custom modal (not a native &lt;dialog&gt;). It can be
+        moved by dragging the header and closed with the close button or
+        by clicking the overlay.
+      &lt;/div&gt;
+      &lt;menu class="footer-btns"&gt;
+        &lt;button class="hl-btn" id="modal-ok"&gt;OK&lt;/button&gt;
+        &lt;button class="hl-btn" id="modal-cancel"&gt;Cancel&lt;/button&gt;
+      &lt;/menu&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/section&gt;</code></pre>
           </div>
         </div>
       </div>

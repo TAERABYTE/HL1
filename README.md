@@ -23,7 +23,7 @@
 Skip the download with jsDelivr to deliver cached version of HL1 compiled CSS and JS to your project.
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.css"/>
-<script type="module" src="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/main.min.js" defer></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.js" defer></script>
 ```
 
 <br>
@@ -52,7 +52,7 @@ Skip the download with jsDelivr to deliver cached version of HL1 compiled CSS an
 - [ ] Dropdown
 - [ ] Menu
 - [ ] Message
-- [ ] Modal
+- [X] Modal
 - [ ] Navbar
 - [ ] Pagination
 - [ ] Panel

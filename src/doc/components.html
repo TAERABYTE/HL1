@@ -18,6 +18,84 @@
     </header>
 
     <main>
+      <!-- # Modal-->
+      <div id="Modal" class="hl-con">
+        <h2 style="color: #c4b550"># Modal</h2>
+
+        <section>
+          <button type="button" class="hl-btn" id="open-modal">
+            Open modal
+          </button>
+
+          <!-- modal overlay + box -->
+          <div class="hl-modal-overlay hidden" id="hl-modal-overlay">
+            <div
+              class="hl-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
+            >
+              <div class="heading">
+                <div class="wrapper drag-handle">
+                  <div class="icon"></div>
+                  <p class="text" id="modal-title">Custom Modal</p>
+                </div>
+                <button class="hl-btn close no-drag" id="modal-close"></button>
+              </div>
+              <div class="content">
+                This is a custom modal (not a native &lt;dialog&gt;). It can be
+                moved by dragging the header and closed with the close button or
+                by clicking the overlay.
+              </div>
+              <menu class="footer-btns">
+                <button class="hl-btn" id="modal-ok">OK</button>
+                <button class="hl-btn" id="modal-cancel">Cancel</button>
+              </menu>
+            </div>
+          </div>
+        </section>
+
+        <div class="code-block">
+          <button class="hl-btn toggle-vision">Show code</button>
+
+          <div class="inner hidden">
+            <button class="hl-btn">Copy</button>
+
+           <pre><code id="code-block">&lt;section&gt;
+  &lt;button type="button" class="hl-btn" id="open-modal"&gt;
+    Open modal
+  &lt;/button&gt;
+
+  &lt;!-- modal overlay + box --&gt;
+  &lt;div class="hl-modal-overlay hidden" id="hl-modal-overlay"&gt;
+    &lt;div
+      class="hl-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    &gt;
+      &lt;div class="heading"&gt;
+        &lt;div class="wrapper drag-handle"&gt;
+          &lt;div class="icon"&gt;&lt;/div&gt;
+          &lt;p class="text" id="modal-title"&gt;Custom Modal&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class="hl-btn close no-drag" id="modal-close"&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="content"&gt;
+        This is a custom modal (not a native &lt;dialog&gt;). It can be
+        moved by dragging the header and closed with the close button or
+        by clicking the overlay.
+      &lt;/div&gt;
+      &lt;menu class="footer-btns"&gt;
+        &lt;button class="hl-btn" id="modal-ok"&gt;OK&lt;/button&gt;
+        &lt;button class="hl-btn" id="modal-cancel"&gt;Cancel&lt;/button&gt;
+      &lt;/menu&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+          </div>
+        </div>
+      </div>
       <!-- # Tabs -->
       <div id="Tabs" class="hl-con">
         <h2 style="color: #c4b550"># Tabs</h2>
@@ -29,7 +107,8 @@
             tabindex="1"
             type="radio"
             id="tabone"
-            checked="checked" />
+            checked="checked"
+          />
           <label class="label" for="tabone">Tab One</label>
           <div class="panel" tabindex="1">
             <h2>Tab One Content</h2>
@@ -40,7 +119,8 @@
             tabindex="1"
             name="tabs"
             type="radio"
-            id="tabtwo" />
+            id="tabtwo"
+          />
           <label class="label" for="tabtwo">Tab Two</label>
           <div class="panel" tabindex="1">
             <h2>Tab Two Content</h2>
@@ -51,7 +131,8 @@
             tabindex="1"
             name="tabs"
             type="radio"
-            id="tabthree" />
+            id="tabthree"
+          />
           <label class="label" for="tabthree">Tab Three</label>
           <div class="panel" tabindex="1">
             <h2>Tab Three Content</h2>
