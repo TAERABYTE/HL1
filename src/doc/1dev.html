@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../HL1.css" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico" />
+    <title>HL1</title>
+  </head>
+
+  <body>
+    <main>
+      <!-- 🔵 Input -->
+      <div id="Input">
+        <h2 style="color: #c4b550"># Input</h2>
+
+        <input class="hl-input" id="input" type="input" />
+        <label class="hl-input__label" for="input">First name</label>
+
+        <br />
+        <br />
+
+        <input type="text" value="john wick" class="hl-input" />
+        <input type="text" disabled value="Disabled" class="hl-input" />
+      </div>
+      <!-- 🔵 Checkbox -->
+      <div id="Checkbox">
+        <h2 style="color: #c4b550"># Checkbox</h2>
+
+        <div class="hl-checkbox">
+          <input id="checkbox" type="checkbox" />
+          <label class="hl-checkbox__label" for="checkbox">Checkbox</label>
+        </div>
+      </div>
+      <!-- 🔵 Select -->
+      <div id="Select">
+        <h2 style="color: #c4b550"># Select</h2>
+
+        <label class="hl-select__label" for="cars">choose something:</label>
+        <select class="hl-select" name="cars" id="cars">
+          <option value="volvo">i</option>
+          <option value="saab">love</option>
+          <option value="opel">you</option>
+          <option value="audi">so much</option>
+        </select>
+      </div>
+      <!-- 🔵 Radio Group -->
+      <div id="RadioGroup">
+        <h2 style="color: #c4b550"># Radio Group</h2>
+
+        <fieldset class="hl-fieldset">
+          <legend>What is your favorite wild animal?</legend>
+          <div class="radio-wrapper">
+            <input type="radio" name="animal" id="elephant" />
+            <label for="elephant">Elephant</label>
+          </div>
+          <div class="radio-wrapper">
+            <input type="radio" name="animal" id="monkey" />
+            <label for="monkey">Monkey</label>
+          </div>
+          <div class="radio-wrapper">
+            <input type="radio" name="animal" id="cheetah" />
+            <label for="cheetah">Cheetah</label>
+          </div>
+          <div class="radio-wrapper">
+            <input type="radio" name="animal" id="giraffe" />
+            <label for="giraffe">Giraffe</label>
+          </div>
+        </fieldset>
+      </div>
+      <!-- 🔵 Slider -->
+      <div id="Slider">
+        <h2 style="color: #c4b550"># Slider</h2>
+
+        <div class="hl-slider">
+          <div class="value">
+            <p>Dark</p>
+            <p>Light</p>
+          </div>
+          <div class="ruler"></div>
+          <input id="range" type="range" min="1" max="100" value="25" />
+          <label for="range">Brightness</label>
+        </div>
+      </div>
+      <!-- 🔵 Progress Bar -->
+      <div id="ProgressBar">
+        <h2 style="color: #c4b550"># Progress Bar</h2>
+
+        <div class="hl-progress-bar">
+          <div style="width: 80%" class="bars"></div>
+        </div>
+      </div>
+      <!-- 🔵 Button -->
+      <div id="Button">
+        <h2 style="color: #c4b550"># Button</h2>
+
+        <button class="hl-btn">Button</button>
+        <button class="hl-btn-success">Success</button>
+        <button class="hl-btn-primary">Primary</button>
+        <button class="hl-btn-warning">Warning</button>
+        <button class="hl-btn-danger">Danger</button>
+        <button class="hl-btn" disabled>Disabled</button>
+      </div>
+      <!-- 🔵 Tooltip -->
+      <div id="Tooltip">
+        <h2 style="color: #c4b550"># Tooltip</h2>
+
+        <div class="hl-tooltip">
+          Right
+          <span style="left: 125%" class="text">Tooltip text</span>
+        </div>
+        <br />
+        <div class="hl-tooltip">
+          Left
+          <span style="right: 125%" class="text">Tooltip text</span>
+        </div>
+        <br />
+        <div class="hl-tooltip">
+          Top
+          <span
+            style="bottom: 100%; width: 100px; left: 50%; margin-left: -50px"
+            class="text"
+            >Tooltip text</span
+          >
+          <!-- set some width, and then set margin-left to be half of the width -->
+        </div>
+        <br />
+        <div class="hl-tooltip">
+          Bottom
+          <span
+            style="top: 100%; width: 100px; left: 50%; margin-left: -50px"
+            class="text"
+            >Tooltip text</span
+          >
+          <!-- set some width, and then set margin-left to be half of the width -->
+        </div>
+      </div>
+      <!-- 🔵 Dialog -->
+      <div id="Dialog">
+        <h2 style="color: #c4b550"># Dialog</h2>
+
+        <section>
+          <button
+            type="button"
+            class="hl-btn"
+            onclick="document.querySelector('.hl-dialog').showModal();"
+          >
+            Open dialog
+          </button>
+
+          <dialog class="hl-dialog">
+            <form method="dialog">
+              <div class="heading">
+                <div class="wrapper drag-handle">
+                  <div class="icon"></div>
+                  <p class="text">Options</p>
+                </div>
+                <button class="hl-btn close no-drag" id="dialog-close"></button>
+              </div>
+              <div class="content">
+                The Half-Life 1 manual text details the game's controls,
+                including primary fire (Mouse 1), secondary fire (Mouse 2), and
+                weapon switching (Mouse Wheel, 'Q'). It also explains movement
+                keys like WASD or arrow keys, jump (Spacebar), and actions such
+                as crouching (Control) and using the flashlight (F). The manual
+                covers the game's main menu options and recommends the Hazard
+                Course for new players.
+              </div>
+              <menu class="footer-btns">
+                <button class="hl-btn">OK</button>
+                <button class="hl-btn">Cancel</button>
+                <button class="hl-btn">Apply</button>
+              </menu>
+            </form>
+          </dialog>
+        </section>
+      </div>
+      <!-- 🔵 Modal-->
+      <div id="Modal">
+        <h2 style="color: #c4b550"># Modal</h2>
+
+        <section>
+          <button type="button" class="hl-btn" id="open-modal">
+            Open modal
+          </button>
+
+          <!-- modal overlay + box -->
+          <div class="hl-modal-overlay hidden" id="hl-modal-overlay">
+            <div
+              class="hl-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
+            >
+              <div class="heading">
+                <div class="wrapper drag-handle">
+                  <div class="icon"></div>
+                  <p class="text" id="modal-title">Custom Modal</p>
+                </div>
+                <button class="hl-btn close no-drag" id="modal-close"></button>
+              </div>
+              <div class="content">
+                This is a custom modal (not a native &lt;dialog&gt;). It can be
+                moved by dragging the header and closed with the close button or
+                by clicking the overlay.
+              </div>
+              <menu class="footer-btns">
+                <button class="hl-btn" id="modal-ok">OK</button>
+                <button class="hl-btn" id="modal-cancel">Cancel</button>
+              </menu>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- 🔵 Horizontal Rule -->
+      <div id="HorizontalRule">
+        <h2 style="color: #c4b550"># Horizontal Rule</h2>
+
+        <hr class="hl-hr" />
+
+        <div class="code-block">
+          <button class="hl-btn toggle-vision">Show code</button>
+
+          <div class="inner hidden">
+            <button class="hl-btn">Copy</button>
+
+            <pre><code id="code-block">&lt;hr class=&quot;hl-hr&quot; /&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <!-- 🔵 Tabs -->
+      <div id="Tabs">
+        <h2 style="color: #c4b550"># Tabs</h2>
+
+        <div class="hl-tabs">
+          <input
+            class="radiotab"
+            name="tabs"
+            tabindex="1"
+            type="radio"
+            id="tabone"
+            checked="checked"
+          />
+          <label class="label" for="tabone">Tab One</label>
+          <div class="panel" tabindex="1">
+            <h2>Tab One Content</h2>
+            <p>Tab content...</p>
+          </div>
+          <input
+            class="radiotab"
+            tabindex="1"
+            name="tabs"
+            type="radio"
+            id="tabtwo"
+          />
+          <label class="label" for="tabtwo">Tab Two</label>
+          <div class="panel" tabindex="1">
+            <h2>Tab Two Content</h2>
+            <p>Tab content...</p>
+          </div>
+          <input
+            class="radiotab"
+            tabindex="1"
+            name="tabs"
+            type="radio"
+            id="tabthree"
+          />
+          <label class="label" for="tabthree">Tab Three</label>
+          <div class="panel" tabindex="1">
+            <h2>Tab Three Content</h2>
+            <p>Tab content...</p>
+          </div>
+        </div>
+      </div>
+      <!-- 🔵 Container -->
+      <div id="Container">
+        <h2 style="color: #c4b550"># Container</h2>
+        <div class="hl-con-s"></div>
+        <br />
+        <div class="hl-con-m"></div>
+        <br />
+        <div class="hl-con"></div>
+        <br />
+      </div>
+    </main>
+  </body>
+  <script type="module" src="../HL1.js" defer></script>
+</html>

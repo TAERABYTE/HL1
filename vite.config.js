@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         v1: resolve(__dirname, 'src/doc/V1.html'),
+        dev: resolve(__dirname, 'src/doc/1dev.html'),
         elements: resolve(__dirname, 'src/doc/elements.html'),
         components: resolve(__dirname, 'src/doc/components.html'),
         spacing: resolve(__dirname, 'src/doc/spacing.html'),
