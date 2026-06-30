@@ -23,12 +23,12 @@
         <h2 style="color: #c4b550"># Modal</h2>
 
         <section>
-          <button type="button" class="hl-btn" id="open-modal">
+          <button type="button" class="hl-btn" data-hl-modal-open="demo-modal">
             Open modal
           </button>
 
           <!-- modal overlay + box -->
-          <div class="hl-modal-overlay hidden" id="hl-modal-overlay">
+          <div class="hl-modal-overlay hidden" data-hl-modal-id="demo-modal">
             <div
               class="hl-modal"
               role="dialog"
@@ -40,7 +40,7 @@
                   <div class="icon"></div>
                   <p class="text" id="modal-title">Custom Modal</p>
                 </div>
-                <button class="hl-btn close no-drag" id="modal-close"></button>
+                <button class="hl-btn close no-drag" data-hl-modal-close="demo-modal"></button>
               </div>
               <div class="content">
                 This is a custom modal (not a native &lt;dialog&gt;). It can be
@@ -48,8 +48,8 @@
                 by clicking the overlay.
               </div>
               <menu class="footer-btns">
-                <button class="hl-btn" id="modal-ok">OK</button>
-                <button class="hl-btn" id="modal-cancel">Cancel</button>
+                <button class="hl-btn" data-hl-modal-close="demo-modal">OK</button>
+                <button class="hl-btn" data-hl-modal-close="demo-modal">Cancel</button>
               </menu>
             </div>
           </div>
