@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../HL1.css" />
     <link rel="stylesheet" href="../index.css" />
-    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico" />
+    <link rel="icon" href="/favicon.ico">
     <title>HL1</title>
   </head>
   <body>
     <header>
       <div class="top">
-        <button class="hl-btn mbb-2" id="back-btn">< Back</button>
+        <button class="hl-btn mbb-2" id="back-btn">&lt;&lt; Back</button>
         <h2 style="color: #c4b550">Components</h2>
       </div>
       <hr class="hl-hr" />
@@ -40,7 +40,10 @@
                   <div class="icon"></div>
                   <p class="text" id="modal-title">Custom Modal</p>
                 </div>
-                <button class="hl-btn close no-drag" data-hl-modal-close="demo-modal"></button>
+                <button
+                  class="hl-btn close no-drag"
+                  data-hl-modal-close="demo-modal"
+                ></button>
               </div>
               <div class="content">
                 This is a custom modal (not a native &lt;dialog&gt;). It can be
@@ -48,8 +51,12 @@
                 by clicking the overlay.
               </div>
               <menu class="footer-btns">
-                <button class="hl-btn" data-hl-modal-close="demo-modal">OK</button>
-                <button class="hl-btn" data-hl-modal-close="demo-modal">Cancel</button>
+                <button class="hl-btn" data-hl-modal-close="demo-modal">
+                  OK
+                </button>
+                <button class="hl-btn" data-hl-modal-close="demo-modal">
+                  Cancel
+                </button>
               </menu>
             </div>
           </div>
@@ -61,7 +68,7 @@
           <div class="inner hidden">
             <button class="hl-btn">Copy</button>
 
-           <pre><code id="code-block">&lt;section&gt;
+            <pre><code id="code-block">&lt;section&gt;
   &lt;button type="button" class="hl-btn" id="open-modal"&gt;
     Open modal
   &lt;/button&gt;
@@ -89,6 +96,342 @@
       &lt;menu class="footer-btns"&gt;
         &lt;button class="hl-btn" id="modal-ok"&gt;OK&lt;/button&gt;
         &lt;button class="hl-btn" id="modal-cancel"&gt;Cancel&lt;/button&gt;
+      &lt;/menu&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <!-- # Modal Tabs-->
+      <div id="Modal" class="hl-con">
+        <h2 style="color: #c4b550"># Modal Tabs</h2>
+
+        <section>
+          <button
+            type="button"
+            class="hl-btn"
+            data-hl-modal-open="my-modal-tabs"
+          >
+            Open Modal Tabs
+          </button>
+
+          <!-- modal tabs -->
+          <div class="hl-modal-overlay hidden" data-hl-modal-id="my-modal-tabs">
+            <div class="hl-modal-tabs">
+              <div class="heading" data-hl-modal-header>
+                <div class="wrapper">
+                  <div class="icon"></div>
+                  <p class="text">Tabs Modal</p>
+                </div>
+                <button
+                  class="hl-btn close"
+                  data-hl-modal-close="my-modal-tabs"
+                ></button>
+              </div>
+
+              <div class="content">
+                <div class="hl-tabs-custom">
+                  <input
+                    class="radiotab"
+                    name="modal-tabs"
+                    tabindex="1"
+                    type="radio"
+                    id="modal-tabone"
+                    checked="checked"
+                  />
+                  <label class="label" for="modal-tabone">Settings</label>
+                  <div class="panel" tabindex="1">
+                    <h2>Settings</h2>
+                    <label class="hl-input__label" for="input"
+                      >First name</label
+                    >
+                    <input
+                      class="hl-input"
+                      id="input"
+                      type="input"
+                    /><br /><br />
+                    <label class="hl-input__label" for="input">Last name</label>
+                    <input
+                      class="hl-input"
+                      id="input"
+                      type="input"
+                    /><br /><br />
+                    <label class="hl-input__label" for="input">name</label>
+                    <input
+                      class="hl-input"
+                      id="input"
+                      type="input"
+                    /><br /><br />
+                    <label class="hl-input__label" for="input">age</label>
+                    <input
+                      class="hl-input"
+                      id="input"
+                      type="input"
+                    /><br /><br />
+                    <label class="hl-input__label" for="input">more</label>
+                    <input
+                      class="hl-input"
+                      id="input"
+                      type="input"
+                    /><br /><br />
+                    <label class="hl-input__label" for="input">......</label>
+                    <input class="hl-input" id="input" type="input" />
+                  </div>
+                  <input
+                    class="radiotab"
+                    tabindex="1"
+                    name="modal-tabs"
+                    type="radio"
+                    id="modal-tabtwo"
+                  />
+                  <label class="label" for="modal-tabtwo">Config</label>
+                  <div class="panel" tabindex="1">
+                    <h2>Config</h2>
+                    <p>Details</p>
+                    <div class="hl-checkbox">
+                      <input id="Config1" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config1"
+                        >Config ONE</label
+                      >
+                    </div>
+                    <div class="hl-checkbox">
+                      <input id="Config2" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config2"
+                        >Config TWO</label
+                      >
+                    </div>
+                    <div class="hl-checkbox">
+                      <input id="Config3" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config3"
+                        >Config THREE</label
+                      >
+                    </div>
+                    <div class="hl-checkbox">
+                      <input id="Config4" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config4"
+                        >Config FOUR</label
+                      >
+                    </div>
+                  </div>
+                  <input
+                    class="radiotab"
+                    tabindex="1"
+                    name="modal-tabs"
+                    type="radio"
+                    id="modal-tabthree"
+                  />
+                  <label class="label" for="modal-tabthree">Tab Three</label>
+                  <div class="panel" tabindex="1">
+                    <h2>Tab Three Content</h2>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                    <p>Tab content...</p>
+                  </div>
+                </div>
+              </div>
+
+              <menu class="footer-btns">
+                <button class="hl-btn" data-hl-modal-close="my-modal-tabs">
+                  OK
+                </button>
+                <button class="hl-btn" data-hl-modal-close="my-modal-tabs">
+                  Cancel
+                </button>
+              </menu>
+            </div>
+          </div>
+        </section>
+
+        <div class="code-block">
+          <button class="hl-btn toggle-vision">Show code</button>
+
+          <div class="inner hidden">
+            <button class="hl-btn">Copy</button>
+
+            <pre><code id="code-block">&lt;section&gt;
+  &lt;button
+    type="button"
+    class="hl-btn"
+    data-hl-modal-open="my-modal-tabs"
+  &gt;
+    Open Modal Tabs
+  &lt;/button&gt;
+
+  &lt;!-- modal tabs --&gt;
+  &lt;div class="hl-modal-overlay hidden" data-hl-modal-id="my-modal-tabs"&gt;
+    &lt;div class="hl-modal-tabs"&gt;
+      &lt;div class="heading" data-hl-modal-header&gt;
+        &lt;div class="wrapper"&gt;
+          &lt;div class="icon"&gt;&lt;/div&gt;
+          &lt;p class="text"&gt;Tabs Modal&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          class="hl-btn close"
+          data-hl-modal-close="my-modal-tabs"
+        &gt;&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div class="content"&gt;
+        &lt;div class="hl-tabs-custom"&gt;
+
+          &lt;input
+            class="radiotab"
+            name="modal-tabs"
+            tabindex="1"
+            type="radio"
+            id="modal-tabone"
+            checked="checked"
+          /&gt;
+          &lt;label class="label" for="modal-tabone"&gt;Settings&lt;/label&gt;
+
+          &lt;div class="panel" tabindex="1"&gt;
+            &lt;h2&gt;Settings&lt;/h2&gt;
+
+            &lt;label class="hl-input__label" for="input"&gt;First name&lt;/label&gt;
+            &lt;input class="hl-input" id="input" type="input" /&gt;
+            &lt;br /&gt;&lt;br /&gt;
+
+            &lt;label class="hl-input__label" for="input"&gt;Last name&lt;/label&gt;
+            &lt;input class="hl-input" id="input" type="input" /&gt;
+            &lt;br /&gt;&lt;br /&gt;
+
+            &lt;label class="hl-input__label" for="input"&gt;name&lt;/label&gt;
+            &lt;input class="hl-input" id="input" type="input" /&gt;
+            &lt;br /&gt;&lt;br /&gt;
+
+            &lt;label class="hl-input__label" for="input"&gt;age&lt;/label&gt;
+            &lt;input class="hl-input" id="input" type="input" /&gt;
+            &lt;br /&gt;&lt;br /&gt;
+
+            &lt;label class="hl-input__label" for="input"&gt;more&lt;/label&gt;
+            &lt;input class="hl-input" id="input" type="input" /&gt;
+            &lt;br /&gt;&lt;br /&gt;
+
+            &lt;label class="hl-input__label" for="input"&gt;......&lt;/label&gt;
+            &lt;input class="hl-input" id="input" type="input" /&gt;
+          &lt;/div&gt;
+
+          &lt;input
+            class="radiotab"
+            tabindex="1"
+            name="modal-tabs"
+            type="radio"
+            id="modal-tabtwo"
+          /&gt;
+          &lt;label class="label" for="modal-tabtwo"&gt;Config&lt;/label&gt;
+
+          &lt;div class="panel" tabindex="1"&gt;
+            &lt;h2&gt;Config&lt;/h2&gt;
+            &lt;p&gt;Details&lt;/p&gt;
+
+            &lt;div class="hl-checkbox"&gt;
+              &lt;input id="Config1" type="checkbox" /&gt;
+              &lt;label class="hl-checkbox__label" for="Config1"&gt;
+                Config ONE
+              &lt;/label&gt;
+            &lt;/div&gt;
+
+            &lt;div class="hl-checkbox"&gt;
+              &lt;input id="Config2" type="checkbox" /&gt;
+              &lt;label class="hl-checkbox__label" for="Config2"&gt;
+                Config TWO
+              &lt;/label&gt;
+            &lt;/div&gt;
+
+            &lt;div class="hl-checkbox"&gt;
+              &lt;input id="Config3" type="checkbox" /&gt;
+              &lt;label class="hl-checkbox__label" for="Config3"&gt;
+                Config THREE
+              &lt;/label&gt;
+            &lt;/div&gt;
+
+            &lt;div class="hl-checkbox"&gt;
+              &lt;input id="Config4" type="checkbox" /&gt;
+              &lt;label class="hl-checkbox__label" for="Config4"&gt;
+                Config FOUR
+              &lt;/label&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;input
+            class="radiotab"
+            tabindex="1"
+            name="modal-tabs"
+            type="radio"
+            id="modal-tabthree"
+          /&gt;
+          &lt;label class="label" for="modal-tabthree"&gt;Tab Three&lt;/label&gt;
+
+          &lt;div class="panel" tabindex="1"&gt;
+            &lt;h2&gt;Tab Three Content&lt;/h2&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+            &lt;p&gt;Tab content...&lt;/p&gt;
+          &lt;/div&gt;
+
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;menu class="footer-btns"&gt;
+        &lt;button class="hl-btn" data-hl-modal-close="my-modal-tabs"&gt;
+          OK
+        &lt;/button&gt;
+        &lt;button class="hl-btn" data-hl-modal-close="my-modal-tabs"&gt;
+          Cancel
+        &lt;/button&gt;
       &lt;/menu&gt;
     &lt;/div&gt;
   &lt;/div&gt;
