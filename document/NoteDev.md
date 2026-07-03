@@ -1,5 +1,9 @@
+## การ build 
+
+ให้เริ่มที่ build:hl1 > build:css > build:js ตามลำดับได้เลย
 
 
+---
 
 
 
