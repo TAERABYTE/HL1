@@ -1,0 +1,6 @@
+/* HL1.scoped.css — ใช้คู่กับ Tailwind / MUI / Bootstrap ได้
+   - ไม่แตะ *, body, scrollbar ของทั้งหน้า → ไม่กระทบส่วนอื่นของแอป
+   - reset + font มีผลเฉพาะใน .hl-root และอยู่ใน @layer hl1-base → CSS ของแอปชนะเสมอ
+   - component (.hl-*) ไม่อยู่ใน layer → ชนะ reset ของ framework อื่น (เช่น Tailwind preflight) */
+@import "./css/base.scoped.css" layer(hl1-base);
+@import "./css/components.css";

@@ -8,7 +8,7 @@
     "dev:css": "postcss src/HL1.css -o HL1/HL1.css --map",
     "build": "vite build",
     "build:hl1": "npm run build:css && npm run build:js",
-    "build:css": "postcss src/HL1.css -o HL1/HL1.min.css",
+    "build:css": "postcss src/HL1.css -o HL1/HL1.min.css && postcss src/HL1.scoped.css -o HL1/HL1.scoped.min.css",
     "build:js": "esbuild src/HL1.js --bundle --minify --format=iife --global-name=HL1 --outfile=HL1/HL1.min.js",
     "preview": "vite preview"
   },

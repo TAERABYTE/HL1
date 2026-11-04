@@ -1,0 +1,53 @@
+/* Scoped base — ไม่มี selector ที่แตะทั้งหน้า
+   :where() = specificity 0 → แอปเขียนทับได้ง่าย */
+
+@font-face {
+  font-family: ArialPixel;
+  src: url("https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/src/HL1.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ตัวแปร + font ติดไปกับทุก component → ใช้นอก .hl-root ได้ (เช่น portal ของ React) */
+:where(.hl-root, [class^="hl-"], [class*=" hl-"]) {
+  --bg: #4c5844;
+  --secondary-bg: #3e4637;
+
+  --accent: #c4b550;
+  --secondary-accent: #958831;
+
+  --text: #d8ded3;
+  --secondary-text: #dedfd6;
+  --text-3: #a0aa95;
+  --success-text: #1ae225;
+  --warning-text: #c4b550;
+  --danger-text: #e2251a;
+  --primary-text: #0900ff;
+
+  --border-light: #8c9284;
+  --border-dark: #292c21;
+
+  --disabled-text: #292c21;
+  font-family: ArialPixel, system-ui, sans-serif;
+}
+
+/* reset + body style เฉพาะใน .hl-root */
+:where(.hl-root) {
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+:where(.hl-root, .hl-root *) {
+  margin: 0;
+  padding: 0;
+}
+
+:where(.hl-root) :where(input, button, textarea, select) {
+  font: inherit;
+}
+
+:where(.hl-root) :where(p, h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: break-word;
+  font-weight: 400;
+}

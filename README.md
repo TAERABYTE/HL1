@@ -23,8 +23,21 @@
 Skip the download with jsDelivr to deliver cached version of HL1 compiled CSS and JS to your project.
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.css"/>
-<script type="module" src="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.js" defer></script>
 ```
+
+### Using with Tailwind / MUI / Bootstrap
+Use the scoped build. It does not touch `body`, `*` or the page scrollbar — HL1's reset and font apply only inside `.hl-root`, and `.hl-*` components work anywhere.
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.scoped.min.css"/>
+
+<div class="hl-root">
+  <button class="hl-btn">OK</button>
+</div>
+```
+
+### React / Next.js / Vue
+Works with the same CDN links (SSR-safe, safe to load twice). To drive a modal from state, add `data-hl-controlled` to the overlay: HL1 then never toggles `hidden` itself and only fires `hl:modal-close` (with `detail.reason`: `button` | `overlay` | `escape` | `api`) so your framework can update its state. See the docs for ready-made `HLModal` components.
 
 <br>
 <br>

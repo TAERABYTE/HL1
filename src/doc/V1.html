@@ -16,11 +16,12 @@
       <p>CSS library based on Half-Life 1 UI.</p>
     </header>
 
-    <div style="margin-bottom: 10px" class="installation">
+    <div style="margin-bottom: 10px" class="installation" id="Installation">
       <h2 style="color: #c4b550"># Installation</h2>
 
       <p>
-        You can install HL1.css simply by pasting this to your html `head` tag:
+        Paste the CDN links into your `head` tag. Works with plain HTML,
+        React, Next.js and Vue — pick your framework below:
       </p>
 
       <div class="code-block">
@@ -403,12 +404,12 @@
         <h2 style="color: #c4b550"># Modal</h2>
 
         <section>
-          <button type="button" class="hl-btn" id="open-modal">
+          <button type="button" class="hl-btn" data-hl-modal-open="demo-modal">
             Open modal
           </button>
 
           <!-- modal overlay + box -->
-          <div class="hl-modal-overlay hidden" id="hl-modal-overlay">
+          <div class="hl-modal-overlay hidden" data-hl-modal-id="demo-modal">
             <div
               class="hl-modal"
               role="dialog"
@@ -419,16 +420,18 @@
                   <div class="icon"></div>
                   <p class="text" id="modal-title">Custom Modal</p>
                 </div>
-                <button class="hl-btn close no-drag" id="modal-close"></button>
+                <button
+                  class="hl-btn close no-drag"
+                  data-hl-modal-close="demo-modal"></button>
               </div>
               <div class="content">
                 This is a custom modal (not a native &lt;dialog&gt;). It can be
-                moved by dragging the header and closed with the close button or
-                by clicking the overlay.
+                moved by dragging the header and closed with the close button,
+                by clicking the overlay or with ESC.
               </div>
               <menu class="footer-btns">
-                <button class="hl-btn" id="modal-ok">OK</button>
-                <button class="hl-btn" id="modal-cancel">Cancel</button>
+                <button class="hl-btn" data-hl-modal-close="demo-modal">OK</button>
+                <button class="hl-btn" data-hl-modal-close="demo-modal">Cancel</button>
               </menu>
             </div>
           </div>
@@ -441,12 +444,12 @@
             <button class="hl-btn">Copy</button>
 
             <pre><code id="code-block">&lt;section&gt;
-  &lt;button type="button" class="hl-btn" id="open-modal"&gt;
+  &lt;button type="button" class="hl-btn" data-hl-modal-open="demo-modal"&gt;
     Open modal
   &lt;/button&gt;
 
   &lt;!-- modal overlay + box --&gt;
-  &lt;div class="hl-modal-overlay hidden" id="hl-modal-overlay"&gt;
+  &lt;div class="hl-modal-overlay hidden" data-hl-modal-id="demo-modal"&gt;
     &lt;div
       class="hl-modal"
       role="dialog"
@@ -458,16 +461,16 @@
           &lt;div class="icon"&gt;&lt;/div&gt;
           &lt;p class="text" id="modal-title"&gt;Custom Modal&lt;/p&gt;
         &lt;/div&gt;
-        &lt;button class="hl-btn close no-drag" id="modal-close"&gt;&lt;/button&gt;
+        &lt;button class="hl-btn close no-drag" data-hl-modal-close="demo-modal"&gt;&lt;/button&gt;
       &lt;/div&gt;
       &lt;div class="content"&gt;
         This is a custom modal (not a native &lt;dialog&gt;). It can be
-        moved by dragging the header and closed with the close button or
-        by clicking the overlay.
+        moved by dragging the header and closed with the close button,
+        by clicking the overlay or with ESC.
       &lt;/div&gt;
       &lt;menu class="footer-btns"&gt;
-        &lt;button class="hl-btn" id="modal-ok"&gt;OK&lt;/button&gt;
-        &lt;button class="hl-btn" id="modal-cancel"&gt;Cancel&lt;/button&gt;
+        &lt;button class="hl-btn" data-hl-modal-close="demo-modal"&gt;OK&lt;/button&gt;
+        &lt;button class="hl-btn" data-hl-modal-close="demo-modal"&gt;Cancel&lt;/button&gt;
       &lt;/menu&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -586,8 +589,4 @@
   </body>
 </html>
 <script type="module" src="../HL1.js" defer></script>
-<script>
-  document.getElementById("about-btn").addEventListener("click", function () {
-    window.location.href = "src/Library/about.html";
-  });
-</script>
+<script type="module" src="./framework-tabs.js"></script>

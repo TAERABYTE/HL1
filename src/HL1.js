@@ -2,62 +2,79 @@
   "use strict";
 
   /* -------------------------------------------------------
-     Show and Hide code
+     Guards
+     - SSR (Next.js / Nuxt): ไม่มี window/document → ไม่ทำอะไร
+     - โหลดซ้ำ (HMR, StrictMode, script ซ้ำ): init แค่ครั้งเดียว
   ------------------------------------------------------- */
-  document.querySelectorAll(".toggle-vision").forEach((button) => {
-    button.addEventListener("click", () => {
-      const block = button.closest(".code-block")?.querySelector(".inner");
-      if (!block) return;
-      block.classList.toggle("hidden");
-      button.textContent = block.classList.contains("hidden")
-        ? "Show code"
-        : "Hide code";
-    });
-  });
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  if (window.__HL1_LOADED__) return;
+  window.__HL1_LOADED__ = true;
+
+  // ทุก event ใช้ delegation ที่ document → ใช้ได้กับ element ที่ React/Vue render ทีหลัง
 
   /* -------------------------------------------------------
-     Code Block: Copy to Clipboard
+     Code Block: Show/Hide code + Copy to Clipboard
   ------------------------------------------------------- */
-  document.querySelectorAll(".inner .hl-btn").forEach((button) => {
-    let timeoutId = null;
-    button.addEventListener("click", async () => {
-      const codeEl = button.closest(".inner")?.querySelector("code");
+  document.addEventListener("click", async function (e) {
+    const target = e.target instanceof Element ? e.target : null;
+    if (!target) return;
+
+    const toggle = target.closest(".code-block .toggle-vision");
+    if (toggle) {
+      const block = toggle.closest(".code-block")?.querySelector(".inner");
+      if (!block) return;
+      block.classList.toggle("hidden");
+      toggle.textContent = block.classList.contains("hidden")
+        ? "Show code"
+        : "Hide code";
+      return;
+    }
+
+    const copy = target.closest(".code-block .inner > .hl-btn");
+    if (copy) {
+      const inner = copy.closest(".inner");
+      const codeEl =
+        inner?.querySelector("pre:not([hidden]) code") ||
+        inner?.querySelector("code");
       if (!codeEl) return;
       try {
         await navigator.clipboard.writeText(codeEl.textContent.trim());
-        button.textContent = "Copied!";
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => (button.textContent = "Copy"), 2000);
+        copy.textContent = "Copied!";
+        clearTimeout(copy._hlTimeout);
+        copy._hlTimeout = setTimeout(() => (copy.textContent = "Copy"), 2000);
       } catch (err) {
         console.error("Clipboard copy failed:", err);
       }
-    });
+    }
   });
 
   /* -------------------------------------------------------
      Modal System - Event Delegation
+
+     2 โหมด:
+     - ปกติ: HL1 เพิ่ม/ลบ class "hidden" ที่ overlay ให้เอง
+     - controlled (overlay มี data-hl-controlled): HL1 ไม่แตะ class เลย
+       แค่ยิง event "hl:modal-open" / "hl:modal-close" ให้ React/Vue ไปเปลี่ยน state เอง
   ------------------------------------------------------- */
-  
-  // Track how many modals are currently open
-  let openModalCount = 0;
 
   // Event delegation - จับ clicks ที่ document level
   document.addEventListener("click", function (e) {
-    const target = e.target;
+    const target = e.target instanceof Element ? e.target : null;
+    if (!target) return;
 
-    // เปิด Modal
-    const openAttr = target.getAttribute("data-hl-modal-open");
-    if (openAttr) {
+    // เปิด Modal (closest → รองรับ <button><span>..</span></button>)
+    const opener = target.closest("[data-hl-modal-open]");
+    if (opener) {
       e.preventDefault();
-      openModal(openAttr);
+      openModal(opener.getAttribute("data-hl-modal-open"));
       return;
     }
 
     // ปิด Modal - ปุ่ม close
-    const closeAttr = target.getAttribute("data-hl-modal-close");
-    if (closeAttr) {
+    const closer = target.closest("[data-hl-modal-close]");
+    if (closer) {
       e.preventDefault();
-      closeModal(closeAttr);
+      closeModal(closer.getAttribute("data-hl-modal-close"), "button");
       return;
     }
 
@@ -65,7 +82,7 @@
     if (target.classList.contains("hl-modal-overlay")) {
       const modalId = target.getAttribute("data-hl-modal-id");
       if (modalId) {
-        closeModal(modalId);
+        closeModal(modalId, "overlay");
       }
     }
   });
@@ -80,7 +97,7 @@
     );
     openModals.forEach((overlay) => {
       const modalId = overlay.getAttribute("data-hl-modal-id");
-      if (modalId) closeModal(modalId);
+      if (modalId) closeModal(modalId, "escape");
     });
 
     // Close any open <dialog.hl-dialog>
@@ -98,13 +115,54 @@
   /* -------------------------------------------------------
      Modal Functions
   ------------------------------------------------------- */
-  
+
+  function getOverlay(modalId) {
+    return document.querySelector(
+      `[data-hl-modal-id="${CSS.escape(String(modalId))}"]`
+    );
+  }
+
+  function isControlled(overlay) {
+    return overlay.hasAttribute("data-hl-controlled");
+  }
+
+  function emit(overlay, name, detail) {
+    overlay.dispatchEvent(new CustomEvent(name, { bubbles: true, detail }));
+  }
+
   function openModal(modalId) {
-    const overlay = document.querySelector(`[data-hl-modal-id="${modalId}"]`);
+    const overlay = getOverlay(modalId);
     if (!overlay) {
       console.warn(`Modal "${modalId}" not found`);
       return;
     }
+
+    // controlled: แค่แจ้ง ให้ framework เปิดเอง
+    if (!isControlled(overlay)) overlay.classList.remove("hidden");
+
+    emit(overlay, "hl:modal-open", { id: modalId });
+  }
+
+  function closeModal(modalId, reason = "api") {
+    const overlay = getOverlay(modalId);
+    if (!overlay || overlay.classList.contains("hidden")) return;
+
+    // controlled: แค่แจ้ง ให้ framework ปิดเอง
+    if (!isControlled(overlay)) overlay.classList.add("hidden");
+
+    emit(overlay, "hl:modal-close", { id: modalId, reason });
+  }
+
+  /* -------------------------------------------------------
+     จัดกลาง + focus ทุกครั้งที่ overlay โผล่ขึ้นมา
+     ไม่ว่าจะเปิดด้วย HL1, เปลี่ยน class ด้วย state หรือ render แบบมีเงื่อนไข
+  ------------------------------------------------------- */
+
+  function syncOverlay(overlay) {
+    const visible = !overlay.classList.contains("hidden");
+    if (visible === !!overlay._hlVisible) return;
+    overlay._hlVisible = visible;
+    if (!visible) return;
 
     const modal = overlay.querySelector(".hl-modal, .hl-modal-tabs");
     if (!modal) return;
@@ -115,92 +173,90 @@
     modal.style.transform = "translate(-50%, -50%)";
     modal.style.position = "fixed";
 
-    // Show
-    overlay.classList.remove("hidden");
-    
-    openModalCount++;
-
-    // Setup draggable ถ้ายังไม่ได้ setup
-    if (!modal.dataset.draggable) {
-      const header = modal.querySelector(".heading, [data-hl-modal-header]");
-      if (header) {
-        makeDraggable(modal, header);
-        modal.dataset.draggable = "true";
-      }
-    }
-
     // Focus trap
     modal.setAttribute("tabindex", "-1");
     modal.focus();
   }
 
-  function closeModal(modalId) {
-    const overlay = document.querySelector(`[data-hl-modal-id="${modalId}"]`);
-    if (!overlay) return;
-
-    overlay.classList.add("hidden");
-    
-    openModalCount = Math.max(0, openModalCount - 1);
+  function syncWithin(node) {
+    if (!(node instanceof Element)) return;
+    if (node.matches(".hl-modal-overlay")) syncOverlay(node);
+    node.querySelectorAll(".hl-modal-overlay").forEach(syncOverlay);
   }
 
-  function makeDraggable(el, handle) {
-    if (!el || !handle) return;
+  new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.type === "childList") m.addedNodes.forEach(syncWithin);
+      else if (m.target.matches(".hl-modal-overlay")) syncOverlay(m.target);
+    }
+  }).observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 
-    handle.style.cursor = "move";
+  syncWithin(document.documentElement);
 
-    handle.addEventListener("pointerdown", function (ev) {
-      if (ev.button !== 0) return;
+  /* -------------------------------------------------------
+     Draggable - Event Delegation
+     ลากได้ทุก modal ที่อยู่ใน DOM ไม่ต้อง setup ทีละตัว
+  ------------------------------------------------------- */
 
-      const interactiveSelector =
-        'button, a, input, textarea, select, [role="button"], .no-drag, [data-hl-modal-close]';
-      if (
-        ev.target instanceof Element &&
-        ev.target.closest(interactiveSelector)
-      ) {
-        return;
-      }
+  const handleSelector =
+    ".hl-modal > .heading, .hl-modal-tabs > .heading, [data-hl-modal-header]";
+  const interactiveSelector =
+    'button, a, input, textarea, select, [role="button"], .no-drag, [data-hl-modal-close]';
 
-      ev.preventDefault();
+  document.addEventListener("pointerdown", function (ev) {
+    if (ev.button !== 0) return;
+    const target = ev.target instanceof Element ? ev.target : null;
+    if (!target || target.closest(interactiveSelector)) return;
 
-      const rect = el.getBoundingClientRect();
-      const offsetX = ev.clientX - rect.left;
-      const offsetY = ev.clientY - rect.top;
+    const handle = target.closest(handleSelector);
+    const el = handle?.closest(".hl-modal, .hl-modal-tabs");
+    if (!el) return;
 
-      el.style.position = "fixed";
-      el.style.margin = "0";
+    ev.preventDefault();
 
-      function onMove(e) {
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const dRect = el.getBoundingClientRect();
-        const left = Math.min(
-          Math.max(e.clientX - offsetX, 0),
-          vw - dRect.width
-        );
-        const top = Math.min(
-          Math.max(e.clientY - offsetY, 0),
-          vh - dRect.height
-        );
+    const rect = el.getBoundingClientRect();
+    const offsetX = ev.clientX - rect.left;
+    const offsetY = ev.clientY - rect.top;
 
-        el.style.left = left + "px";
-        el.style.top = top + "px";
-        el.style.transform = "";
-      }
+    el.style.position = "fixed";
+    el.style.margin = "0";
 
-      function onUp() {
-        document.removeEventListener("pointermove", onMove);
-        document.removeEventListener("pointerup", onUp);
-      }
+    function onMove(e) {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const dRect = el.getBoundingClientRect();
+      const left = Math.min(
+        Math.max(e.clientX - offsetX, 0),
+        vw - dRect.width
+      );
+      const top = Math.min(
+        Math.max(e.clientY - offsetY, 0),
+        vh - dRect.height
+      );
 
-      document.addEventListener("pointermove", onMove);
-      document.addEventListener("pointerup", onUp);
-    });
-  }
+      el.style.left = left + "px";
+      el.style.top = top + "px";
+      el.style.transform = "";
+    }
+
+    function onUp() {
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerup", onUp);
+    }
+
+    document.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerup", onUp);
+  });
 
   /* -------------------------------------------------------
      Public API
   ------------------------------------------------------- */
-  
+
   window.HLModal = {
     open: openModal,
     close: closeModal,

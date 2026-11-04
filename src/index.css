@@ -74,11 +74,27 @@ main {
   .inner {
     position: relative;
 
-    .hl-btn {
+    > .hl-btn {
       position: absolute;
       right: 1px;
       top: 1px;
       z-index: 5;
+    }
+
+    .fw-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 5px;
+      padding-right: 80px;
+
+      .hl-btn.active {
+        color: #c4b550;
+      }
+    }
+
+    pre[hidden] {
+      display: none;
     }
 
     pre {
