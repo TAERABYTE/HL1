@@ -7,14 +7,15 @@
 
 
 
-## ถ้า CDN มันมีแคชเก่า ให้ต่อท้าย url โดย ?v=[เลขเวอร์ชั่น]
+## ถ้า CDN มันมีแคชเก่า (หลัง push ขึ้น main) ให้กดลิงก์ purge ด้านล่าง
 
-ตัวอย่าง > 
+กดเปิดทีละลิงก์ → jsDelivr จะล้างแคชให้ (ขึ้น `"status": "finished"` = สำเร็จ)
 
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.css?v=99" />
-<script type="module" src="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.js?v=999" ></script>
-```
+- [Purge HL1.min.js](https://purge.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.js)
+- [Purge HL1.min.css](https://purge.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.min.css)
+- [Purge HL1.scoped.min.css](https://purge.jsdelivr.net/gh/TAERABYTE/HL1@main/HL1/HL1.scoped.min.css)
+
+ถ้ายังเห็นของเก่าอยู่ = แคชของ browser → กด `Ctrl + F5` (hard reload)
 
 
 
