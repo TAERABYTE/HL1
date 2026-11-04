@@ -13,6 +13,41 @@ const SCOPED_NOTE = `ใช้คู่กับ Tailwind / MUI / Bootstrap → 
   - ใส่ class="hl-root" ที่กล่องที่อยากได้ font + reset ของ HL1
   - component .hl-* ใช้ได้ทุกที่ แม้อยู่นอก .hl-root`;
 
+/* -------------------------------------------------------
+   Component ที่เป็น markup ล้วน (ไม่มี state / event)
+   เขียน HTML ครั้งเดียว → แปลงเป็น React / Next.js / Vue ให้อัตโนมัติ
+------------------------------------------------------- */
+
+const indent = (str, n) =>
+  str
+    .split("\n")
+    .map((line) => (line ? " ".repeat(n) + line : line))
+    .join("\n");
+
+const toJsx = (html) =>
+  html
+    .replace(/<!--\s*([\s\S]*?)\s*-->/g, "{/* $1 */}")
+    .replace(/\sclass=/g, " className=")
+    .replace(/\sfor=/g, " htmlFor=")
+    .replace(/<(img|input|br|hr)\b([^>]*?)\s*\/?>/g, "<$1$2 />");
+
+function staticExamples(name, html) {
+  const component = `export default function ${name}() {
+  return (
+    <>
+${indent(toJsx(html), 6)}
+    </>
+  );
+}`;
+
+  return {
+    html,
+    react: component,
+    next: `// ไม่มี state / event → เป็น Server Component ได้ (ไม่ต้อง "use client")\n${component}`,
+    vue: `<template>\n${indent(html, 2)}\n</template>`,
+  };
+}
+
 const FRAMEWORKS = [
   { key: "html", label: "HTML" },
   { key: "react", label: "React" },
@@ -82,10 +117,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
-// (ถ้าใช้ TypeScript) types/hl1.d.ts — ให้เรียก window.HLModal ได้
+// (ถ้าใช้ TypeScript) types/hl1.d.ts — ให้เรียก window.HLModal / HLNotify ได้
 declare global {
   interface Window {
-    HLModal: { open: (id: string) => void; close: (id: string) => void };
+    HLModal?: { open: (id: string) => void; close: (id: string) => void };
+    HLDropdown?: { close: () => void };
+    HLNotify?: {
+      show: (
+        message: string,
+        options?: { type?: "" | "success" | "warning" | "danger"; title?: string; timeout?: number }
+      ) => { close: () => void };
+    };
   }
 }
 export {};
@@ -1159,6 +1201,690 @@ export default function Container({ children }: { children: React.ReactNode }) {
   </div>
 </template>`,
   },
+
+  /* ---------------------------------------------------- */
+  Textarea: {
+    html: `<label class="hl-textarea__label" for="message">Message</label>
+<textarea class="hl-textarea" id="message" rows="4" placeholder="Type here..."></textarea>
+
+<label class="hl-textarea__label" for="message-disabled">Disabled</label>
+<textarea class="hl-textarea" id="message-disabled" disabled>Read only</textarea>`,
+
+    react: `import { useState } from "react";
+
+export default function TextareaDemo() {
+  const [message, setMessage] = useState("");
+
+  return (
+    <>
+      <label className="hl-textarea__label" htmlFor="message">
+        Message ({message.length}/200)
+      </label>
+      <textarea
+        className="hl-textarea"
+        id="message"
+        rows={4}
+        maxLength={200}
+        placeholder="Type here..."
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+
+      <label className="hl-textarea__label" htmlFor="message-disabled">Disabled</label>
+      <textarea className="hl-textarea" id="message-disabled" disabled defaultValue="Read only" />
+    </>
+  );
+}`,
+
+    next: `"use client";
+import { useState } from "react";
+
+export default function TextareaDemo() {
+  const [message, setMessage] = useState("");
+
+  return (
+    <>
+      <label className="hl-textarea__label" htmlFor="message">
+        Message ({message.length}/200)
+      </label>
+      <textarea
+        className="hl-textarea"
+        id="message"
+        rows={4}
+        maxLength={200}
+        placeholder="Type here..."
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+
+      <label className="hl-textarea__label" htmlFor="message-disabled">Disabled</label>
+      <textarea className="hl-textarea" id="message-disabled" disabled defaultValue="Read only" />
+    </>
+  );
+}`,
+
+    vue: `<script setup>
+import { ref } from "vue";
+
+const message = ref("");
+</script>
+
+<template>
+  <label class="hl-textarea__label" for="message">
+    Message ({{ message.length }}/200)
+  </label>
+  <textarea
+    class="hl-textarea"
+    id="message"
+    rows="4"
+    maxlength="200"
+    placeholder="Type here..."
+    v-model="message"
+  ></textarea>
+
+  <label class="hl-textarea__label" for="message-disabled">Disabled</label>
+  <textarea class="hl-textarea" id="message-disabled" disabled>Read only</textarea>
+</template>`,
+  },
+
+  /* ---------------------------------------------------- */
+  Box: staticExamples(
+    "BoxDemo",
+    `<!-- กล่องบุ๋ม (ค่าเริ่มต้น) -->
+<div class="hl-box">Sunken box</div>
+
+<!-- กล่องนูน -->
+<div class="hl-box raised">Raised box</div>
+
+<!-- เลื่อนได้เมื่อเนื้อหายาว (สูงสุด 200px) -->
+<div class="hl-box scroll">
+  <p>Line 1</p>
+  <p>Line 2</p>
+  <p>...</p>
+</div>`
+  ),
+
+  /* ---------------------------------------------------- */
+  Panel: staticExamples(
+    "PanelDemo",
+    `<div class="hl-panel">
+  <div class="heading">
+    <p class="text">Server Info</p>
+  </div>
+  <div class="content">
+    <p>Map: crossfire</p>
+    <p>Players: 12 / 16</p>
+  </div>
+  <div class="footer">
+    <button class="hl-btn">Connect</button>
+    <button class="hl-btn">Refresh</button>
+  </div>
+</div>`
+  ),
+
+  /* ---------------------------------------------------- */
+  Card: staticExamples(
+    "CardDemo",
+    `<div class="hl-grid hl-grid-auto">
+  <div class="hl-card">
+    <img class="image" src="/your-image.jpg" alt="Black Mesa" />
+    <div class="body">
+      <p class="title">Black Mesa</p>
+      <p class="text">Research facility in New Mexico.</p>
+    </div>
+    <div class="footer">
+      <button class="hl-btn">Open</button>
+    </div>
+  </div>
+
+  <!-- ไม่มีรูปก็ได้ -->
+  <div class="hl-card">
+    <div class="body">
+      <p class="title">Lambda Core</p>
+      <p class="text">Teleportation research lab.</p>
+    </div>
+  </div>
+</div>`
+  ),
+
+  /* ---------------------------------------------------- */
+  Navbar: {
+    html: `<nav class="hl-navbar">
+  <a class="brand" href="/">HL1</a>
+  <a class="active" href="/">Home</a>
+  <a href="/docs">Docs</a>
+  <a href="/about">About</a>
+  <div class="end">
+    <button class="hl-btn">Login</button>
+  </div>
+</nav>
+
+<!-- ลิงก์ที่เลือกอยู่: ใส่ class="active" หรือ aria-current="page" -->`,
+
+    react: `// ใส่ class "active" ที่ลิงก์ของหน้าปัจจุบัน
+// (ถ้าใช้ react-router: <NavLink> ใส่ class "active" ให้เองอยู่แล้ว)
+import { NavLink } from "react-router-dom";
+
+const links = [
+  { to: "/", label: "Home" },
+  { to: "/docs", label: "Docs" },
+  { to: "/about", label: "About" },
+];
+
+export default function Navbar() {
+  return (
+    <nav className="hl-navbar">
+      <NavLink className="brand" to="/">HL1</NavLink>
+      {links.map((l) => (
+        <NavLink key={l.to} to={l.to} end>
+          {l.label}
+        </NavLink>
+      ))}
+      <div className="end">
+        <button className="hl-btn">Login</button>
+      </div>
+    </nav>
+  );
+}`,
+
+    next: `// components/Navbar.tsx
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/docs", label: "Docs" },
+  { href: "/about", label: "About" },
+];
+
+export default function Navbar() {
+  const pathname = usePathname();
+
+  return (
+    <nav className="hl-navbar">
+      <Link className="brand" href="/">HL1</Link>
+      {links.map((l) => (
+        <Link
+          key={l.href}
+          href={l.href}
+          aria-current={pathname === l.href ? "page" : undefined}
+        >
+          {l.label}
+        </Link>
+      ))}
+      <div className="end">
+        <button className="hl-btn">Login</button>
+      </div>
+    </nav>
+  );
+}
+
+// วางใน app/layout.tsx → <Navbar /> จะโชว์ทุกหน้า`,
+
+    vue: `<!-- components/Navbar.vue (ใช้กับ vue-router) -->
+<script setup>
+const links = [
+  { to: "/", label: "Home" },
+  { to: "/docs", label: "Docs" },
+  { to: "/about", label: "About" },
+];
+</script>
+
+<template>
+  <nav class="hl-navbar">
+    <RouterLink class="brand" to="/">HL1</RouterLink>
+    <!-- RouterLink ใส่ aria-current="page" ให้ลิงก์ที่ตรงกับหน้าปัจจุบันเอง -->
+    <RouterLink v-for="l in links" :key="l.to" :to="l.to">
+      {{ l.label }}
+    </RouterLink>
+    <div class="end">
+      <button class="hl-btn">Login</button>
+    </div>
+  </nav>
+</template>`,
+  },
+
+  /* ---------------------------------------------------- */
+  Menu: {
+    html: `<nav class="hl-menu">
+  <p class="label">Game</p>
+  <a class="active" href="#">New Game</a>
+  <a href="#">Load Game</a>
+  <a href="#">Options</a>
+  <div class="divider"></div>
+  <p class="label">Multiplayer</p>
+  <a href="#">Find Servers</a>
+  <a href="#">Create Server</a>
+</nav>`,
+
+    react: `import { useState } from "react";
+
+const groups = [
+  { label: "Game", items: ["New Game", "Load Game", "Options"] },
+  { label: "Multiplayer", items: ["Find Servers", "Create Server"] },
+];
+
+export default function Menu() {
+  const [active, setActive] = useState("New Game");
+
+  return (
+    <nav className="hl-menu">
+      {groups.map((g, i) => (
+        <div key={g.label}>
+          {i > 0 && <div className="divider"></div>}
+          <p className="label">{g.label}</p>
+          {g.items.map((item) => (
+            <a
+              key={item}
+              href="#"
+              className={active === item ? "active" : undefined}
+              onClick={(e) => {
+                e.preventDefault();
+                setActive(item);
+              }}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+      ))}
+    </nav>
+  );
+}`,
+
+    next: `// components/Sidebar.tsx — เมนูข้างที่ไฮไลต์ตาม URL
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const groups = [
+  { label: "Game", items: [{ href: "/new", label: "New Game" }, { href: "/load", label: "Load Game" }] },
+  { label: "Multiplayer", items: [{ href: "/servers", label: "Find Servers" }] },
+];
+
+export default function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <nav className="hl-menu">
+      {groups.map((g, i) => (
+        <div key={g.label}>
+          {i > 0 && <div className="divider"></div>}
+          <p className="label">{g.label}</p>
+          {g.items.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={pathname === item.href ? "page" : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      ))}
+    </nav>
+  );
+}`,
+
+    vue: `<script setup>
+import { ref } from "vue";
+
+const groups = [
+  { label: "Game", items: ["New Game", "Load Game", "Options"] },
+  { label: "Multiplayer", items: ["Find Servers", "Create Server"] },
+];
+const active = ref("New Game");
+</script>
+
+<template>
+  <nav class="hl-menu">
+    <template v-for="(g, i) in groups" :key="g.label">
+      <div v-if="i > 0" class="divider"></div>
+      <p class="label">{{ g.label }}</p>
+      <a
+        v-for="item in g.items"
+        :key="item"
+        href="#"
+        :class="{ active: active === item }"
+        @click.prevent="active = item"
+      >
+        {{ item }}
+      </a>
+    </template>
+  </nav>
+</template>
+
+<!-- ใช้กับ vue-router: เปลี่ยน <a> เป็น <RouterLink :to="..."> ได้เลย -->`,
+  },
+
+  /* ---------------------------------------------------- */
+  Dropdown: {
+    html: `<div class="hl-dropdown">
+  <button class="hl-btn" data-hl-dropdown>Options</button>
+  <div class="menu">
+    <button class="item">New Game</button>
+    <button class="item">Load Game</button>
+    <a class="item" href="#">Settings</a>
+    <div class="divider"></div>
+    <button class="item" disabled>Quit</button>
+  </div>
+</div>
+
+<!-- เมนูชิดขวา: class="hl-dropdown right" / เปิดขึ้นด้านบน: class="hl-dropdown up" -->
+<!-- HL1.js เปิด/ปิดให้เอง + คลิกข้างนอก / ESC / เลือก item = ปิด + ใช้ลูกศรขึ้นลงได้ -->`,
+
+    react: `// HL1.js เปิด/ปิด menu ให้เอง → ใส่แค่ onClick ที่ item
+// สำคัญ: className ของ .hl-dropdown ให้เป็นค่าคงที่ (HL1 จะเติม class "open" เอง)
+export default function GameMenu() {
+  return (
+    <div className="hl-dropdown">
+      <button className="hl-btn" data-hl-dropdown>Options</button>
+      <div className="menu">
+        <button className="item" onClick={() => console.log("new")}>New Game</button>
+        <button className="item" onClick={() => console.log("load")}>Load Game</button>
+        <a className="item" href="/settings">Settings</a>
+        <div className="divider"></div>
+        <button className="item" disabled>Quit</button>
+      </div>
+    </div>
+  );
+}
+
+// ปิดด้วยโค้ด: window.HLDropdown.close()`,
+
+    next: `"use client"; // ต้องมีเพราะใช้ onClick
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+// HL1.js เปิด/ปิด menu ให้เอง → ใส่แค่ onClick ที่ item
+// สำคัญ: className ของ .hl-dropdown ให้เป็นค่าคงที่ (HL1 จะเติม class "open" เอง)
+export default function GameMenu() {
+  const router = useRouter();
+
+  return (
+    <div className="hl-dropdown">
+      <button className="hl-btn" data-hl-dropdown>Options</button>
+      <div className="menu">
+        <button className="item" onClick={() => router.push("/new")}>New Game</button>
+        <button className="item" onClick={() => router.push("/load")}>Load Game</button>
+        <Link className="item" href="/settings">Settings</Link>
+        <div className="divider"></div>
+        <button className="item" disabled>Quit</button>
+      </div>
+    </div>
+  );
+}`,
+
+    vue: `<script setup>
+// HL1.js เปิด/ปิด menu ให้เอง → ใส่แค่ @click ที่ item
+// สำคัญ: class ของ .hl-dropdown ให้เป็นค่าคงที่ (HL1 จะเติม class "open" เอง)
+const select = (action) => console.log(action);
+</script>
+
+<template>
+  <div class="hl-dropdown">
+    <button class="hl-btn" data-hl-dropdown>Options</button>
+    <div class="menu">
+      <button class="item" @click="select('new')">New Game</button>
+      <button class="item" @click="select('load')">Load Game</button>
+      <RouterLink class="item" to="/settings">Settings</RouterLink>
+      <div class="divider"></div>
+      <button class="item" disabled>Quit</button>
+    </div>
+  </div>
+</template>`,
+  },
+
+  /* ---------------------------------------------------- */
+  Message: {
+    html: `<div class="hl-message">
+  <div class="body">Default message.</div>
+</div>
+
+<div class="hl-message success">
+  <div class="body">
+    <p class="title">Success</p>
+    <p>Game saved.</p>
+  </div>
+  <!-- data-hl-dismiss = กดแล้วซ่อนกล่องนี้ -->
+  <button class="hl-btn close" data-hl-dismiss aria-label="Close"></button>
+</div>
+
+<div class="hl-message warning">
+  <div class="body">Low health.</div>
+</div>
+
+<div class="hl-message danger">
+  <div class="body">Connection lost.</div>
+</div>`,
+
+    react: `import { useState } from "react";
+
+// ใน React ให้ซ่อนด้วย state (ไม่ต้องใช้ data-hl-dismiss)
+export default function SaveMessage() {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
+
+  return (
+    <div className="hl-message success">
+      <div className="body">
+        <p className="title">Success</p>
+        <p>Game saved.</p>
+      </div>
+      <button className="hl-btn close" aria-label="Close" onClick={() => setVisible(false)}></button>
+    </div>
+  );
+}
+
+// type: "" | "success" | "warning" | "danger"
+export function Message({ type = "", title, children }) {
+  return (
+    <div className={"hl-message " + type}>
+      <div className="body">
+        {title && <p className="title">{title}</p>}
+        <p>{children}</p>
+      </div>
+    </div>
+  );
+}
+
+// <Message type="danger" title="Error">Connection lost.</Message>`,
+
+    next: `// components/Message.tsx — ไม่มี state → Server Component ได้
+import type { ReactNode } from "react";
+
+type Props = {
+  type?: "" | "success" | "warning" | "danger";
+  title?: string;
+  children: ReactNode;
+};
+
+export function Message({ type = "", title, children }: Props) {
+  return (
+    <div className={"hl-message " + type}>
+      <div className="body">
+        {title && <p className="title">{title}</p>}
+        <p>{children}</p>
+      </div>
+    </div>
+  );
+}
+
+// ---------- แบบกดปิดได้ (ต้อง "use client") ----------
+"use client";
+import { useState } from "react";
+
+export function DismissibleMessage(props: Props) {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
+
+  return (
+    <div className={"hl-message " + (props.type ?? "")}>
+      <div className="body">
+        {props.title && <p className="title">{props.title}</p>}
+        <p>{props.children}</p>
+      </div>
+      <button className="hl-btn close" aria-label="Close" onClick={() => setVisible(false)}></button>
+    </div>
+  );
+}`,
+
+    vue: `<!-- components/Message.vue -->
+<script setup>
+import { ref } from "vue";
+
+// type: "" | "success" | "warning" | "danger"
+defineProps({
+  type: { type: String, default: "" },
+  title: String,
+  dismissible: Boolean,
+});
+const visible = ref(true);
+</script>
+
+<template>
+  <div v-if="visible" :class="['hl-message', type]">
+    <div class="body">
+      <p v-if="title" class="title">{{ title }}</p>
+      <p><slot /></p>
+    </div>
+    <button v-if="dismissible" class="hl-btn close" aria-label="Close" @click="visible = false"></button>
+  </div>
+</template>
+
+<!-- <Message type="success" title="Success" dismissible>Game saved.</Message> -->`,
+  },
+
+  /* ---------------------------------------------------- */
+  Notification: {
+    html: `<!-- แบบไม่เขียน JS: ใส่ data-hl-notify ที่ปุ่ม -->
+<button class="hl-btn" data-hl-notify="Game saved." data-hl-notify-type="success" data-hl-notify-title="Success">
+  Save
+</button>
+<button class="hl-btn" data-hl-notify="Connection lost." data-hl-notify-type="danger">
+  Error
+</button>
+
+<!-- แบบเรียกด้วย JS -->
+<script>
+  HLNotify.show("Game saved.", {
+    type: "success",   // "" | "success" | "warning" | "danger"
+    title: "Success",  // ไม่ใส่ก็ได้
+    timeout: 4000,     // ms, 0 = ไม่ปิดเอง
+  });
+</script>`,
+
+    react: `// popup อยู่นอก React tree → เรียก window.HLNotify.show() จากที่ไหนก็ได้
+export default function SaveButton() {
+  const save = async () => {
+    try {
+      // await api.save();
+      window.HLNotify?.show("Game saved.", { type: "success", title: "Success" });
+    } catch {
+      window.HLNotify?.show("Save failed.", { type: "danger", timeout: 0 });
+    }
+  };
+
+  return <button className="hl-btn" onClick={save}>Save</button>;
+}
+
+// ปิดด้วยโค้ด: const n = HLNotify.show("Loading..."); n.close();`,
+
+    next: `"use client";
+
+// popup อยู่นอก React tree → เรียก window.HLNotify.show() จากที่ไหนก็ได้
+// (type ของ window.HLNotify ดูได้ที่หัวข้อ Installation → Next.js)
+export default function SaveButton() {
+  const save = async () => {
+    try {
+      // await fetch("/api/save", { method: "POST" });
+      window.HLNotify?.show("Game saved.", { type: "success", title: "Success" });
+    } catch {
+      window.HLNotify?.show("Save failed.", { type: "danger", timeout: 0 });
+    }
+  };
+
+  return <button className="hl-btn" onClick={save}>Save</button>;
+}`,
+
+    vue: `<script setup>
+// popup อยู่นอก Vue app → เรียก window.HLNotify.show() จากที่ไหนก็ได้
+async function save() {
+  try {
+    // await api.save();
+    window.HLNotify?.show("Game saved.", { type: "success", title: "Success" });
+  } catch {
+    window.HLNotify?.show("Save failed.", { type: "danger", timeout: 0 });
+  }
+}
+</script>
+
+<template>
+  <button class="hl-btn" @click="save">Save</button>
+</template>`,
+  },
+
+  /* ---------------------------------------------------- */
+  Grid: staticExamples(
+    "GridDemo",
+    `<!-- 3 คอลัมน์เท่ากัน (จอ < 600px เหลือ 1 คอลัมน์) -->
+<div class="hl-grid hl-grid-3">
+  <div class="hl-box">1</div>
+  <div class="hl-box">2</div>
+  <div class="hl-box">3</div>
+  <div class="hl-box hl-span-2">span 2</div>
+  <div class="hl-box">5</div>
+  <div class="hl-box hl-span-full">full width</div>
+</div>
+
+<!-- จำนวนคอลัมน์อัตโนมัติ ตามความกว้าง (ช่องละอย่างน้อย 200px) -->
+<div class="hl-grid hl-grid-auto">
+  <div class="hl-box">A</div>
+  <div class="hl-box">B</div>
+  <div class="hl-box">C</div>
+</div>`
+  ),
+
+  /* ---------------------------------------------------- */
+  Columns: staticExamples(
+    "ColumnsDemo",
+    `<!-- แบ่งเท่ากัน -->
+<div class="hl-cols">
+  <div class="hl-col hl-box">col</div>
+  <div class="hl-col hl-box">col</div>
+  <div class="hl-col hl-box">col</div>
+</div>
+
+<!-- กำหนดความกว้าง + ที่เหลือใช้ hl-col -->
+<div class="hl-cols">
+  <div class="hl-col-25 hl-box">25%</div>
+  <div class="hl-col hl-box">auto</div>
+</div>`
+  ),
+
+  /* ---------------------------------------------------- */
+  Flexbox: staticExamples(
+    "FlexboxDemo",
+    `<!-- แถวแนวนอน จัดกลางแนวตั้ง ระยะห่าง 8px -->
+<div class="hl-flex hl-items-center hl-gap-2">
+  <button class="hl-btn">One</button>
+  <button class="hl-btn">Two</button>
+  <button class="hl-btn">Three</button>
+</div>
+
+<!-- ชิดซ้าย-ขวา -->
+<div class="hl-flex hl-justify-between hl-items-center">
+  <p>Title</p>
+  <button class="hl-btn">Action</button>
+</div>
+
+<!-- แนวตั้ง + ช่องที่ยืดเต็ม -->
+<div class="hl-flex hl-flex-col hl-gap-1">
+  <div class="hl-box">top</div>
+  <div class="hl-box hl-flex-1">grow</div>
+</div>`
+  ),
 
   /* ---------------------------------------------------- */
   HorizontalRule: {

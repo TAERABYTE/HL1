@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../HL1.css" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico" />
+    <title>HL1</title>
+  </head>
+  <body>
+    <header>
+      <div class="top">
+        <button class="hl-btn mbb-2" id="back-btn">&lt;&lt; Back</button>
+        <h2 style="color: #c4b550">Flexbox</h2>
+      </div>
+      <hr class="hl-hr" />
+    </header>
+
+    <main>
+      <!-- # Flexbox -->
+      <div id="Flexbox" class="hl-con">
+        <h2 style="color: #c4b550"># Flexbox</h2>
+
+        <div class="hl-flex hl-flex-col hl-gap-3">
+          <div class="hl-flex hl-items-center hl-gap-2">
+            <button class="hl-btn">One</button>
+            <button class="hl-btn">Two</button>
+            <button class="hl-btn">Three</button>
+          </div>
+
+          <div class="hl-box hl-flex hl-justify-between hl-items-center">
+            <p>Title</p>
+            <button class="hl-btn">Action</button>
+          </div>
+
+          <div class="hl-flex hl-flex-col hl-gap-1" style="height: 120px">
+            <div class="hl-box">top</div>
+            <div class="hl-box hl-flex-1">grow</div>
+          </div>
+        </div>
+
+        <div class="code-block">
+          <button class="hl-btn toggle-vision">Show code</button>
+
+          <div class="inner hidden">
+            <button class="hl-btn">Copy</button>
+
+            <pre><code></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- # Classes -->
+      <div id="FlexboxClasses" class="hl-con">
+        <h2 style="color: #c4b550"># Classes</h2>
+
+        <p>All classes start with <code>hl-</code> so they never clash with Tailwind / Bootstrap.</p>
+        <br />
+
+        <div class="hl-grid hl-grid-2">
+          <div class="hl-box">
+            <p class="mbb-1" style="color: #c4b550">Display / Direction</p>
+            <p>hl-flex · hl-inline-flex</p>
+            <p>hl-flex-row · hl-flex-col</p>
+            <p>hl-flex-wrap</p>
+          </div>
+          <div class="hl-box">
+            <p class="mbb-1" style="color: #c4b550">Grow / Shrink</p>
+            <p>hl-flex-1 (fill remaining space)</p>
+            <p>hl-shrink-0 (never shrink)</p>
+          </div>
+          <div class="hl-box">
+            <p class="mbb-1" style="color: #c4b550">Align items</p>
+            <p>hl-items-start · hl-items-center</p>
+            <p>hl-items-end · hl-items-stretch</p>
+          </div>
+          <div class="hl-box">
+            <p class="mbb-1" style="color: #c4b550">Justify content</p>
+            <p>hl-justify-start · hl-justify-center</p>
+            <p>hl-justify-end · hl-justify-between</p>
+            <p>hl-justify-around</p>
+          </div>
+          <div class="hl-box hl-span-full">
+            <p class="mbb-1" style="color: #c4b550">Gap (works with grid too)</p>
+            <p>hl-gap-0 = 0 · hl-gap-1 = 4px · hl-gap-2 = 8px · hl-gap-3 = 12px</p>
+            <p>hl-gap-4 = 16px · hl-gap-5 = 20px · hl-gap-6 = 24px</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer style="color: #fb821b">Made by TAE</footer>
+  </body>
+</html>
+<script type="module" src="../HL1.js" defer></script>
+<script type="module" src="./framework-tabs.js"></script>
+<script>
+  document.getElementById("back-btn").addEventListener("click", function () {
+    window.location.href = "/";
+  });
+</script>

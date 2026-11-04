@@ -296,6 +296,45 @@
   user-select: none;
 }
 
+/* 🌎Textarea */
+.hl-textarea {
+  display: block;
+  width: 100%;
+  min-height: 80px;
+  box-sizing: border-box;
+  outline: 0;
+  resize: vertical;
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  padding: 3px 4px;
+  font-size: 16px;
+  line-height: 17px;
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+
+  &::selection {
+    background-color: var(--secondary-accent);
+    color: white;
+  }
+
+  &:disabled {
+    background-color: var(--bg);
+    pointer-events: none;
+    color: var(--text-3);
+  }
+}
+
+.hl-textarea__label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--secondary-text);
+  user-select: none;
+
+  &:has(+ .hl-textarea:focus) {
+    color: var(--accent);
+  }
+}
+
 /* 🌎Select */
 .hl-select {
   outline: 0;
@@ -874,6 +913,532 @@
   border-top: solid 1px var(--border-light);
   order: 99;
   color: var(--text);
+}
+
+/* 🌎Box — กล่องบุ๋ม (sunken) / นูน (.raised) */
+.hl-box {
+  padding: 8px;
+  background-color: var(--secondary-bg);
+  color: var(--text);
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+
+  &.raised {
+    background-color: var(--bg);
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  }
+
+  &.scroll {
+    max-height: 200px;
+    overflow: auto;
+  }
+}
+
+/* 🌎Panel — หน้าต่างแบบอยู่กับที่ (ไม่ใช่ modal) */
+.hl-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+
+  > .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px 4px 4px 8px;
+    user-select: none;
+
+    .text {
+      font-size: 16px;
+      line-height: 15px;
+      color: white;
+    }
+  }
+
+  > .content {
+    flex: 1;
+    padding: 8px 12px 12px;
+  }
+
+  > .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    padding: 0 8px 8px;
+  }
+}
+
+/* 🌎Card */
+.hl-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 1px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+
+  > .image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background-color: var(--secondary-bg);
+    border-bottom: 1px solid var(--border-dark);
+  }
+
+  > .body {
+    flex: 1;
+    padding: 10px 12px;
+  }
+
+  .title {
+    margin-bottom: 4px;
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--accent);
+  }
+
+  .text {
+    color: var(--text-3);
+  }
+
+  > .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    padding: 0 12px 12px;
+  }
+}
+
+/* 🌎Navbar */
+.hl-navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background-color: var(--bg);
+  border: 1px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  user-select: none;
+
+  .brand {
+    padding: 4px 12px 4px 6px;
+    font-size: 18px;
+    line-height: 17px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:not(.brand):not([class*="hl-btn"]) {
+    padding: 4px 8px;
+    line-height: 15px;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid transparent;
+
+    &:hover {
+      color: white;
+    }
+
+    &.active,
+    &[aria-current="page"] {
+      color: var(--accent);
+      background-color: var(--secondary-bg);
+      border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+    }
+  }
+
+  .end {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+}
+
+/* 🌎Menu — เมนูแนวตั้ง (sidebar / list) */
+.hl-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: 2px;
+  background-color: var(--secondary-bg);
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  user-select: none;
+
+  .label {
+    padding: 6px 6px 2px;
+    font-size: 14px;
+    line-height: 15px;
+    color: var(--text-3);
+    text-transform: uppercase;
+  }
+
+  a {
+    display: block;
+    padding: 3px 6px;
+    line-height: 17px;
+    color: var(--text);
+    text-decoration: none;
+
+    &:hover {
+      color: white;
+    }
+
+    &.active,
+    &[aria-current="page"] {
+      background-color: var(--secondary-accent);
+      color: white;
+    }
+  }
+
+  .divider {
+    margin: 4px 2px;
+    border-top: 1px solid var(--border-dark);
+    border-bottom: 1px solid var(--border-light);
+  }
+}
+
+/* 🌎Dropdown — เปิด/ปิดโดย HL1.js (ปุ่มที่มี data-hl-dropdown) */
+.hl-dropdown {
+  position: relative;
+  display: inline-block;
+
+  > .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 2px;
+    background-color: var(--bg);
+    border: 1px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  &.open > .menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.right > .menu {
+    left: auto;
+    right: 0;
+  }
+
+  &.up > .menu {
+    top: auto;
+    bottom: 100%;
+    margin: 0 0 2px;
+  }
+
+  .item {
+    display: block;
+    width: 100%;
+    padding: 3px 8px;
+    font: inherit;
+    line-height: 17px;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--text);
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      outline: 0;
+      background-color: var(--secondary-accent);
+      color: white;
+    }
+
+    &:disabled,
+    &.disabled {
+      color: var(--disabled-text);
+      background: none;
+      pointer-events: none;
+    }
+  }
+
+  .divider {
+    margin: 3px 2px;
+    border-top: 1px solid var(--border-dark);
+    border-bottom: 1px solid var(--border-light);
+  }
+}
+
+/* 🌎Message — กล่องข้อความในหน้า (success / warning / danger) */
+.hl-message {
+  --hl-msg-color: var(--text-3);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 8px 8px 10px;
+  background-color: var(--secondary-bg);
+  color: var(--text);
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  border-left: 3px solid var(--hl-msg-color);
+
+  &.success {
+    --hl-msg-color: var(--success-text);
+  }
+
+  &.warning {
+    --hl-msg-color: var(--warning-text);
+  }
+
+  &.danger {
+    --hl-msg-color: var(--danger-text);
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  > .body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .title {
+    margin-bottom: 2px;
+    color: var(--hl-msg-color);
+  }
+
+  > .hl-btn.close {
+    flex-shrink: 0;
+  }
+}
+
+/* 🌎Notification — popup มุมขวาบน สร้างด้วย HLNotify.show() */
+.hl-notify-stack {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: min(320px, calc(100vw - 24px));
+  pointer-events: none;
+}
+
+.hl-notify {
+  pointer-events: auto;
+  background-color: var(--bg);
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  border-left: 3px solid var(--hl-msg-color);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  animation: hl-notify-in 0.15s ease-out;
+}
+
+@keyframes hl-notify-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hl-notify {
+    animation: none;
+  }
+}
+
+/* 🌎Grid */
+.hl-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(var(--hl-cols, 1), minmax(0, 1fr));
+}
+
+.hl-grid-2 {
+  --hl-cols: 2;
+}
+
+.hl-grid-3 {
+  --hl-cols: 3;
+}
+
+.hl-grid-4 {
+  --hl-cols: 4;
+}
+
+.hl-grid-auto {
+  grid-template-columns: repeat(auto-fill, minmax(var(--hl-min, 200px), 1fr));
+}
+
+.hl-span-2 {
+  grid-column: span 2;
+}
+
+.hl-span-3 {
+  grid-column: span 3;
+}
+
+.hl-span-full {
+  grid-column: 1 / -1;
+}
+
+/* 🌎Columns */
+.hl-cols {
+  display: flex;
+  gap: 8px;
+
+  > * {
+    min-width: 0;
+  }
+}
+
+.hl-col {
+  flex: 1 1 0;
+}
+
+.hl-col-25 {
+  flex: 0 1 25%;
+}
+
+.hl-col-33 {
+  flex: 0 1 33.333%;
+}
+
+.hl-col-50 {
+  flex: 0 1 50%;
+}
+
+.hl-col-66 {
+  flex: 0 1 66.666%;
+}
+
+.hl-col-75 {
+  flex: 0 1 75%;
+}
+
+/* จอเล็ก: grid / columns เรียงเป็นแถวเดียว */
+@media (max-width: 600px) {
+  .hl-grid-2,
+  .hl-grid-3,
+  .hl-grid-4 {
+    --hl-cols: 1;
+  }
+
+  .hl-span-2,
+  .hl-span-3 {
+    grid-column: auto;
+  }
+
+  .hl-cols {
+    flex-direction: column;
+
+    > * {
+      flex-basis: auto;
+    }
+  }
+}
+
+/* 🌎Flexbox */
+.hl-flex {
+  display: flex;
+}
+
+.hl-inline-flex {
+  display: inline-flex;
+}
+
+.hl-flex-row {
+  flex-direction: row;
+}
+
+.hl-flex-col {
+  flex-direction: column;
+}
+
+.hl-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.hl-flex-1 {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.hl-shrink-0 {
+  flex-shrink: 0;
+}
+
+.hl-items-start {
+  align-items: flex-start;
+}
+
+.hl-items-center {
+  align-items: center;
+}
+
+.hl-items-end {
+  align-items: flex-end;
+}
+
+.hl-items-stretch {
+  align-items: stretch;
+}
+
+.hl-justify-start {
+  justify-content: flex-start;
+}
+
+.hl-justify-center {
+  justify-content: center;
+}
+
+.hl-justify-end {
+  justify-content: flex-end;
+}
+
+.hl-justify-between {
+  justify-content: space-between;
+}
+
+.hl-justify-around {
+  justify-content: space-around;
+}
+
+/* Gap (hl-gap-x) ใช้ scale เดียวกับ spacing: 0 / 4 / 8 / 12 / 16 / 20 / 24px */
+.hl-gap-0 {
+  gap: 0px;
+}
+
+.hl-gap-1 {
+  gap: 4px;
+}
+
+.hl-gap-2 {
+  gap: 8px;
+}
+
+.hl-gap-3 {
+  gap: 12px;
+}
+
+.hl-gap-4 {
+  gap: 16px;
+}
+
+.hl-gap-5 {
+  gap: 20px;
+}
+
+.hl-gap-6 {
+  gap: 24px;
 }
 
 /* 🌎Spacing */

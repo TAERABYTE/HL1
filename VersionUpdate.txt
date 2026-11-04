@@ -1,0 +1,46 @@
+#V2.1.0
+
+[ Component ใหม่ ]
+- Box (hl-box) : กล่องบุ๋ม / นูน (.raised) / เลื่อนได้ (.scroll)
+- Panel (hl-panel) : หน้าต่างแบบอยู่กับที่ มีหัว / เนื้อหา / ปุ่มด้านล่าง
+- Card (hl-card) : การ์ด มีรูป / หัวข้อ / ข้อความ / ปุ่ม
+- Navbar (hl-navbar) : แถบเมนูด้านบน ลิงก์ที่เลือกใช้ .active หรือ aria-current="page"
+- Menu (hl-menu) : เมนูแนวตั้งสำหรับ sidebar มีหัวข้อกลุ่ม (.label) และเส้นคั่น (.divider)
+- Dropdown (hl-dropdown) : เมนูแบบกดเปิด ใช้ data-hl-dropdown ที่ปุ่ม
+    - HL1.js เปิด/ปิดให้เอง (คลิกข้างนอก / ESC / เลือก item = ปิด)
+    - เปิดได้ทีละอัน, ใช้ลูกศรขึ้นลงได้, ข้าม item ที่ disabled
+    - .right = เมนูชิดขวา / .up = เปิดขึ้นด้านบน
+    - dropdown อยู่ใน modal แล้วกด ESC จะปิดแค่ dropdown
+- Message (hl-message) : กล่องข้อความ แบบ default / success / warning / danger
+    - ปุ่มที่มี data-hl-dismiss กดแล้วซ่อนกล่อง
+- Notification : popup มุมขวาบน
+    - เรียกด้วย HLNotify.show("ข้อความ", { type, title, timeout })
+    - หรือใส่ data-hl-notify="ข้อความ" ที่ปุ่ม (ไม่ต้องเขียน JS)
+    - ปิดเองตามเวลา, timeout: 0 = ไม่ปิดเอง, เอาเมาส์ชี้ = หยุดนับเวลา
+- Textarea (hl-textarea) : ช่องพิมพ์หลายบรรทัด + label ไฮไลต์ตอน focus
+
+[ Layout / Utilities ใหม่ ]
+- Grid (hl-grid) : hl-grid-2 / 3 / 4 / auto + hl-span-2 / 3 / full
+- Columns (hl-cols) : hl-col (แบ่งเท่ากัน) + hl-col-25 / 33 / 50 / 66 / 75
+- จอเล็กกว่า 600px Grid และ Columns เรียงเป็นคอลัมน์เดียวอัตโนมัติ
+- Flexbox : hl-flex, hl-flex-col, hl-flex-wrap, hl-flex-1, hl-items-*, hl-justify-*, hl-gap-0 ถึง 6
+- class ใหม่ทั้งหมดขึ้นต้นด้วย hl- ไม่ชนกับ Tailwind / Bootstrap
+
+[ JS (HL1.min.js) ]
+- เพิ่ม window.HLDropdown.close() และ window.HLNotify.show()
+- ปุ่ม ESC ปิด dropdown ก่อน modal
+
+[ เว็บ Document ]
+- เพิ่มหัวข้อใหม่ใน form.html / elements.html / components.html / layout.html
+- เพิ่มหน้าใหม่ flexbox.html (ปุ่ม Flexbox ในแท็บ CSS Helpers ของหน้าแรก)
+- ทุกหัวข้อใหม่มีแท็บโค้ด HTML / React / Next.js / Vue
+- framework-tabs.js : component ที่เป็น markup ล้วน เขียน HTML ครั้งเดียวแล้วแปลงเป็น React / Next / Vue ให้อัตโนมัติ
+- เพิ่ม type ของ window.HLNotify / HLDropdown ในแท็บ Installation (Next.js) และ document/Framework-Setup.md
+
+[ แก้ไข / อื่นๆ ]
+- ลบ src/doc/V1.html (หน้าเก่า) และเอาออกจาก vite.config.js (ก่อนหน้านี้ npm run build พัง)
+- อัปเดต checklist ใน README.md : Box, Notification, Card, Dropdown, Menu, Message, Navbar, Panel, Textarea, Columns, Grid, Flexbox = [X]
+- build ใหม่ : HL1/HL1.min.js, HL1/HL1.min.css, HL1/HL1.scoped.min.css
+
+[ หลัง push ]
+- กดลิงก์ purge ใน document/NoteDev.md เพื่อล้างแคช CDN

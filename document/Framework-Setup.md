@@ -67,15 +67,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 > ถ้าใช้ Tailwind ให้เปลี่ยน CSS เป็น `HL1.scoped.min.css` และวาง `<link>` นี้ **ก่อน** CSS ของ Tailwind
 
-### Step 2 — (TypeScript) ประกาศ type ให้ `window.HLModal`
+### Step 2 — (TypeScript) ประกาศ type ให้ `window.HLModal` / `HLNotify`
 
-สร้างไฟล์ `types/hl1.d.ts` — ถ้าไม่เรียก `window.HLModal` ในโค้ด ข้ามขั้นนี้ได้
+สร้างไฟล์ `types/hl1.d.ts` — ถ้าไม่เรียก `window.HL...` ในโค้ด ข้ามขั้นนี้ได้
 
 ```ts
 // types/hl1.d.ts
 declare global {
   interface Window {
     HLModal?: { open: (id: string) => void; close: (id: string) => void };
+    HLDropdown?: { close: () => void };
+    HLNotify?: {
+      show: (
+        message: string,
+        options?: { type?: "" | "success" | "warning" | "danger"; title?: string; timeout?: number }
+      ) => { close: () => void };
+    };
   }
 }
 export {};

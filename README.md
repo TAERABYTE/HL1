@@ -47,29 +47,32 @@ Works with the same CDN links (SSR-safe, safe to load twice). To drive a modal f
 ### 1. ⚛️ Elements
 
 * **Block** [ ]
-* **Box** [ ]
+* **Box** [X]
 * **Button** [X]
 * **Content** [ ]
 * **Delete** [ ]
 * **Icon** [X]
 * **Image** [ ]
-* **Notification** [ ]
+* **Notification** [X]
 * **Tag** [ ]
 * **Title** [ ]
+* **Tooltip** [X]
 * **Horizontal Rule** [X]
 
 ---
 
 ### 2. 🧩 Components
 
-* **Card** [ ]
-* **Dropdown** [ ]
-* **Menu** [ ]
-* **Message** [ ]
+* **Card** [X]
+* **Dialog** [X]
+* **Dropdown** [X]
+* **Menu** [X]
+* **Message** [X]
 * **Modal** [X]
-* **Navbar** [ ]
+* **Modal Tabs** [X]
+* **Navbar** [X]
 * **Pagination** [ ]
-* **Panel** [ ]
+* **Panel** [X]
 * **Tabs** [X]
 * **Progress bars** [X]
 
@@ -79,10 +82,11 @@ Works with the same CDN links (SSR-safe, safe to load twice). To drive a modal f
 
 * **General** [ ]
 * **Input** [X]
-* **Textarea** [ ]
+* **Textarea** [X]
 * **Select** [X]
 * **Checkbox** [X]
-* **Radio** [ ]
+* **Radio** [X]
+* **Slider** [X]
 * **File** [ ]
 
 ---
@@ -93,8 +97,8 @@ Works with the same CDN links (SSR-safe, safe to load twice). To drive a modal f
 * **Hero** [ ]
 * **Section** [ ]
 * **Media Object** [ ]
-* **Columns** [ ]
-* **Grid** [ ]
+* **Columns** [X]
+* **Grid** [X]
 
 ---
 
@@ -103,7 +107,7 @@ Works with the same CDN links (SSR-safe, safe to load twice). To drive a modal f
 * **Color Palette** [ ]
 * **Spacing** [X]
 * **Visibility** [ ]
-* **Flexbox** [ ]
+* **Flexbox** [X]
 * **Other** [ ]
 
 ---

@@ -91,6 +91,14 @@
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
 
+    // Dropdown ปิดก่อน (dropdown ใน modal → ไม่ปิด modal ไปด้วย)
+    const openDropdown = document.querySelector(".hl-dropdown.open");
+    if (openDropdown) {
+      closeDropdowns();
+      openDropdown.querySelector("[data-hl-dropdown]")?.focus();
+      return;
+    }
+
     // Close any open .hl-modal-overlay
     const openModals = document.querySelectorAll(
       ".hl-modal-overlay:not(.hidden)"
@@ -254,12 +262,168 @@
   });
 
   /* -------------------------------------------------------
+     Dropdown - Event Delegation
+     <div class="hl-dropdown">
+       <button data-hl-dropdown>..</button>
+       <div class="menu"><button class="item">..</button></div>
+     </div>
+  ------------------------------------------------------- */
+
+  function closeDropdowns(except) {
+    document.querySelectorAll(".hl-dropdown.open").forEach((dd) => {
+      if (dd === except) return;
+      dd.classList.remove("open");
+      dd.querySelector("[data-hl-dropdown]")?.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function toggleDropdown(dd, force) {
+    const open = force ?? !dd.classList.contains("open");
+    closeDropdowns(dd);
+    dd.classList.toggle("open", open);
+    dd.querySelector("[data-hl-dropdown]")?.setAttribute("aria-expanded", String(open));
+  }
+
+  document.addEventListener("click", function (e) {
+    const target = e.target instanceof Element ? e.target : null;
+    if (!target) return;
+
+    const trigger = target.closest("[data-hl-dropdown]");
+    const dd = trigger?.closest(".hl-dropdown");
+    if (dd) {
+      e.preventDefault();
+      toggleDropdown(dd);
+      return;
+    }
+
+    // เลือก item หรือคลิกข้างนอก → ปิด
+    if (target.closest(".hl-dropdown .item") || !target.closest(".hl-dropdown")) {
+      closeDropdowns();
+    }
+  });
+
+  // ลูกศรขึ้น/ลง: เปิด menu + เลื่อน focus ระหว่าง item
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+    const dd = e.target instanceof Element ? e.target.closest(".hl-dropdown") : null;
+    if (!dd) return;
+
+    const items = [
+      ...dd.querySelectorAll(".menu .item:not(:disabled):not(.disabled)"),
+    ];
+    if (!items.length) return;
+    e.preventDefault();
+    toggleDropdown(dd, true);
+
+    const i = items.indexOf(document.activeElement);
+    const last = items.length - 1;
+    const next =
+      e.key === "ArrowDown"
+        ? items[i < 0 || i === last ? 0 : i + 1]
+        : items[i <= 0 ? last : i - 1];
+    next.focus();
+  });
+
+  /* -------------------------------------------------------
+     Message: ปุ่ม data-hl-dismiss → ซ่อน .hl-message ที่ครอบอยู่
+     (ใช้ attribute hidden ไม่ลบ element → ไม่ชนกับ React/Vue)
+  ------------------------------------------------------- */
+
+  document.addEventListener("click", function (e) {
+    const target = e.target instanceof Element ? e.target : null;
+    const btn = target?.closest("[data-hl-dismiss]");
+    const box = btn?.closest(".hl-message");
+    if (!box) return;
+
+    // popup ที่ HL1 สร้างเอง → ลบทิ้งได้
+    if (box.classList.contains("hl-notify")) box.remove();
+    else box.hidden = true;
+  });
+
+  /* -------------------------------------------------------
+     Notification: HLNotify.show("Saved!", { type, title, timeout })
+     หรือ <button data-hl-notify="Saved!" data-hl-notify-type="success">
+  ------------------------------------------------------- */
+
+  function getNotifyStack() {
+    let stack = document.querySelector(".hl-notify-stack");
+    if (!stack) {
+      stack = document.createElement("div");
+      stack.className = "hl-notify-stack";
+      stack.setAttribute("aria-live", "polite");
+      document.body.appendChild(stack);
+    }
+    return stack;
+  }
+
+  function notify(message, { type = "", title = "", timeout = 4000 } = {}) {
+    const el = document.createElement("div");
+    el.className = "hl-message hl-notify" + (type ? " " + type : "");
+    el.setAttribute("role", type === "danger" ? "alert" : "status");
+
+    // textContent → ข้อความจากผู้ใช้ไม่ถูกตีความเป็น HTML
+    const body = document.createElement("div");
+    body.className = "body";
+    if (title) {
+      const titleEl = document.createElement("p");
+      titleEl.className = "title";
+      titleEl.textContent = title;
+      body.appendChild(titleEl);
+    }
+    const text = document.createElement("p");
+    text.textContent = message;
+    body.appendChild(text);
+
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "hl-btn close";
+    close.setAttribute("aria-label", "Close");
+    close.setAttribute("data-hl-dismiss", "");
+
+    el.append(body, close);
+    getNotifyStack().appendChild(el);
+
+    // timeout: 0 = ไม่ปิดเอง / เอาเมาส์ชี้ = หยุดนับ
+    let timer;
+    const remove = () => {
+      clearTimeout(timer);
+      el.remove();
+    };
+    const start = () => {
+      if (timeout > 0) timer = setTimeout(remove, timeout);
+    };
+    el.addEventListener("mouseenter", () => clearTimeout(timer));
+    el.addEventListener("mouseleave", start);
+    start();
+
+    return { close: remove };
+  }
+
+  document.addEventListener("click", function (e) {
+    const target = e.target instanceof Element ? e.target : null;
+    const btn = target?.closest("[data-hl-notify]");
+    if (!btn) return;
+    notify(btn.getAttribute("data-hl-notify"), {
+      type: btn.getAttribute("data-hl-notify-type") || "",
+      title: btn.getAttribute("data-hl-notify-title") || "",
+    });
+  });
+
+  /* -------------------------------------------------------
      Public API
   ------------------------------------------------------- */
 
   window.HLModal = {
     open: openModal,
     close: closeModal,
+  };
+
+  window.HLDropdown = {
+    close: () => closeDropdowns(),
+  };
+
+  window.HLNotify = {
+    show: notify,
   };
 
   console.log("HL1 CDN loaded ✓");
