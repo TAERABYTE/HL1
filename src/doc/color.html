@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../HL1.css" />
+    <link rel="stylesheet" href="../index.css" />
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico" />
+    <title>HL1</title>
+  </head>
+  <body>
+    <header>
+      <div class="top">
+        <button class="hl-btn mbb-2" id="back-btn">&lt;&lt; Back</button>
+        <h2 style="color: #c4b550">Color Palette</h2>
+      </div>
+      <hr class="hl-hr" />
+    </header>
+
+    <main>
+      <!-- # Color Palette -->
+      <div id="ColorPalette" class="hl-con">
+        <h2 style="color: #c4b550"># Color Palette</h2>
+        <p>
+          Base colors of HL1 (CSS variables in :root). Click a color to copy its
+          HEX code. Use it in CSS with <code>color: var(--accent);</code>
+        </p>
+
+        <div id="palette"></div>
+      </div>
+    </main>
+
+    <footer style="color: #fb821b">Made by TAE</footer>
+  </body>
+</html>
+<script type="module" src="../HL1.js" defer></script>
+<script>
+  document.getElementById("back-btn").addEventListener("click", function () {
+    window.location.href = "/";
+  });
+
+  // ค่าสีอ่านจาก :root ตอนรัน → ตรงกับ base.css เสมอ ไม่ต้องเขียน HEX ซ้ำ
+  const groups = [
+    { label: "Background", vars: ["--bg", "--secondary-bg"] },
+    { label: "Accent", vars: ["--accent", "--secondary-accent", "--orange"] },
+    { label: "Text", vars: ["--text", "--secondary-text", "--text-3", "--disabled-text"] },
+    { label: "Status", vars: ["--success-text", "--warning-text", "--danger-text", "--primary-text"] },
+    { label: "Border", vars: ["--border-light", "--border-dark"] },
+  ];
+
+  const rootStyle = getComputedStyle(document.documentElement);
+  const palette = document.getElementById("palette");
+
+  groups.forEach(({ label, vars }) => {
+    const title = document.createElement("h4");
+    title.className = "palette-label";
+    title.textContent = label;
+
+    const grid = document.createElement("div");
+    grid.className = "hl-grid hl-grid-auto";
+    grid.style.setProperty("--hl-min", "160px");
+
+    vars.forEach((name) => {
+      const hex = rootStyle.getPropertyValue(name).trim();
+
+      const swatch = document.createElement("button");
+      swatch.type = "button";
+      swatch.className = "swatch";
+      swatch.title = "Copy " + hex;
+
+      const color = document.createElement("span");
+      color.className = "color";
+      color.style.backgroundColor = "var(" + name + ")";
+
+      const varName = document.createElement("span");
+      varName.className = "name";
+      varName.textContent = name;
+
+      const hexText = document.createElement("span");
+      hexText.className = "hex";
+      hexText.textContent = hex;
+
+      swatch.append(color, varName, hexText);
+      swatch.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(hex);
+          window.HLNotify?.show("Copied " + hex, { type: "success", timeout: 2000 });
+        } catch (err) {
+          window.HLNotify?.show("Copy failed.", { type: "danger" });
+        }
+      });
+
+      grid.appendChild(swatch);
+    });
+
+    palette.append(title, grid);
+  });
+</script>

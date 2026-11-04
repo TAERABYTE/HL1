@@ -1223,7 +1223,7 @@
 /* 🌎Notification — popup มุมขวาบน สร้างด้วย HLNotify.show() */
 .hl-notify-stack {
   position: fixed;
-  top: 12px;
+  bottom: 12px;
   right: 12px;
   z-index: 10000;
   display: flex;
@@ -1252,6 +1252,63 @@
 @media (prefers-reduced-motion: reduce) {
   .hl-notify {
     animation: none;
+  }
+}
+
+/* 🌎Table — ตารางบุ๋ม หัวตารางนูน / .hover / .striped / แถวที่เลือกใช้ .active */
+.hl-table-wrap {
+  max-height: 240px;
+  overflow: auto;
+  background-color: var(--secondary-bg);
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+
+  > .hl-table {
+    border: none;
+  }
+}
+
+.hl-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--secondary-bg);
+  color: var(--text);
+  border: 1px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+
+  th {
+    position: sticky;
+    top: 0;
+    padding: 3px 8px;
+    font-weight: normal;
+    line-height: 17px;
+    text-align: left;
+    white-space: nowrap;
+    color: white;
+    background-color: var(--bg);
+    border: 1px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    user-select: none;
+  }
+
+  td {
+    padding: 3px 8px;
+    line-height: 17px;
+  }
+
+  &.striped tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
+  &.hover tbody tr:hover {
+    color: white;
+    cursor: default;
+  }
+
+  tbody tr.active,
+  tbody tr[aria-selected="true"] {
+    background-color: var(--secondary-accent);
+    color: white;
   }
 }
 

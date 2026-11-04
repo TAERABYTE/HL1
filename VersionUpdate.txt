@@ -1,3 +1,21 @@
+#V2.2.1
+
+[ Component ]
+- Navbar : ทำให้ทางขวาเป็นเมนู Dropdown
+
+[ Elements ]
+- Notification : เปลี่ยนเป็นขึ้นทางขวาล่างจอแทน
+- Table (hl-table) : ตารางบุ๋ม หัวตารางนูน
+    - .hover = ไฮไลต์แถวตอนชี้ / .striped = สลับสีแถว
+    - แถวที่เลือกใช้ .active หรือ aria-selected="true"
+    - ครอบด้วย .hl-table-wrap = เลื่อนได้ (สูงสุด 240px) หัวตารางติดด้านบน
+
+[ Document ]
+- Color Palette : หน้าแสดงสีพื้นฐานของ HL1 (CSS variables) กดที่ช่องสี = ก็อบ HEX
+
+
+
+
 #V2.1.0
 
 [ Component ใหม่ ]

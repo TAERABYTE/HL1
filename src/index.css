@@ -131,3 +131,51 @@ footer {
     padding: 20px;
   }
 }
+
+/* Color Palette (doc only) */
+.palette-label {
+  margin: 15px 0 5px;
+  color: var(--text-3);
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  font: inherit;
+  text-align: left;
+  color: var(--text-3);
+  background-color: var(--bg);
+  border: 1px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  cursor: pointer;
+
+  .color {
+    height: 56px;
+    border: 1px solid;
+    border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  }
+
+  .name {
+    color: var(--text);
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: white;
+
+    .name {
+      color: white;
+    }
+  }
+
+  &:focus-visible {
+    outline: 1px dotted var(--accent);
+    outline-offset: 1px;
+  }
+
+  &:active {
+    border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  }
+}

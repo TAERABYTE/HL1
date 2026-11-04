@@ -54,6 +54,7 @@ Works with the same CDN links (SSR-safe, safe to load twice). To drive a modal f
 * **Icon** [X]
 * **Image** [ ]
 * **Notification** [X]
+* **Table** [X]
 * **Tag** [ ]
 * **Title** [ ]
 * **Tooltip** [X]
@@ -104,7 +105,7 @@ Works with the same CDN links (SSR-safe, safe to load twice). To drive a modal f
 
 ### 5. 🛠️ Utilities
 
-* **Color Palette** [ ]
+* **Color Palette** [X]
 * **Spacing** [X]
 * **Visibility** [ ]
 * **Flexbox** [X]

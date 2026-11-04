@@ -1887,6 +1887,149 @@ async function save() {
   ),
 
   /* ---------------------------------------------------- */
+  Table: {
+    html: `<!-- .hl-table-wrap = เลื่อนได้เมื่อแถวเยอะ (หัวตารางติดด้านบน) -->
+<div class="hl-table-wrap">
+  <!-- .hover = ไฮไลต์ตอนชี้ / .striped = สลับสีแถว -->
+  <table class="hl-table hover striped">
+    <thead>
+      <tr>
+        <th>Server</th>
+        <th>Map</th>
+        <th>Players</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- แถวที่เลือก: .active หรือ aria-selected="true" -->
+      <tr class="active">
+        <td>Black Mesa East</td>
+        <td>crossfire</td>
+        <td>12 / 16</td>
+      </tr>
+      <tr>
+        <td>Lambda Core</td>
+        <td>stalkyard</td>
+        <td>8 / 16</td>
+      </tr>
+    </tbody>
+  </table>
+</div>`,
+
+    react: `import { useState } from "react";
+
+const servers = [
+  { name: "Black Mesa East", map: "crossfire", players: "12 / 16" },
+  { name: "Lambda Core", map: "stalkyard", players: "8 / 16" },
+  { name: "Xen Outpost", map: "bounce", players: "4 / 12" },
+];
+
+export default function ServerTable() {
+  const [selected, setSelected] = useState(servers[0].name);
+
+  return (
+    <div className="hl-table-wrap">
+      <table className="hl-table hover striped">
+        <thead>
+          <tr>
+            <th>Server</th>
+            <th>Map</th>
+            <th>Players</th>
+          </tr>
+        </thead>
+        <tbody>
+          {servers.map((s) => (
+            <tr
+              key={s.name}
+              aria-selected={selected === s.name}
+              onClick={() => setSelected(s.name)}
+            >
+              <td>{s.name}</td>
+              <td>{s.map}</td>
+              <td>{s.players}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}`,
+
+    next: `"use client";
+import { useState } from "react";
+
+type Server = { name: string; map: string; players: string };
+
+// ดึงข้อมูลใน Server Component แล้วส่งเข้ามาเป็น props ได้
+export default function ServerTable({ servers }: { servers: Server[] }) {
+  const [selected, setSelected] = useState<string | null>(null);
+
+  return (
+    <div className="hl-table-wrap">
+      <table className="hl-table hover striped">
+        <thead>
+          <tr>
+            <th>Server</th>
+            <th>Map</th>
+            <th>Players</th>
+          </tr>
+        </thead>
+        <tbody>
+          {servers.map((s) => (
+            <tr
+              key={s.name}
+              aria-selected={selected === s.name}
+              onClick={() => setSelected(s.name)}
+            >
+              <td>{s.name}</td>
+              <td>{s.map}</td>
+              <td>{s.players}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}`,
+
+    vue: `<script setup>
+import { ref } from "vue";
+
+const servers = [
+  { name: "Black Mesa East", map: "crossfire", players: "12 / 16" },
+  { name: "Lambda Core", map: "stalkyard", players: "8 / 16" },
+  { name: "Xen Outpost", map: "bounce", players: "4 / 12" },
+];
+const selected = ref(servers[0].name);
+</script>
+
+<template>
+  <div class="hl-table-wrap">
+    <table class="hl-table hover striped">
+      <thead>
+        <tr>
+          <th>Server</th>
+          <th>Map</th>
+          <th>Players</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="s in servers"
+          :key="s.name"
+          :aria-selected="selected === s.name"
+          @click="selected = s.name"
+        >
+          <td>{{ s.name }}</td>
+          <td>{{ s.map }}</td>
+          <td>{{ s.players }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>`,
+  },
+
+  /* ---------------------------------------------------- */
   HorizontalRule: {
     react: `export default function Divider() {
   return <hr className="hl-hr" />;

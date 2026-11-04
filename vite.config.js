@@ -12,6 +12,7 @@ export default defineConfig({
         spacing: resolve(__dirname, 'src/doc/spacing.html'),
         flexbox: resolve(__dirname, 'src/doc/flexbox.html'),
         layout: resolve(__dirname, 'src/doc/layout.html'),
+        color: resolve(__dirname, 'src/doc/color.html'),
         form: resolve(__dirname, 'src/doc/form.html'),
       },
     },
